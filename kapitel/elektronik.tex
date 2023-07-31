@@ -3,6 +3,11 @@
 \chapter{Elektronik}
 \label{chap:elektronik}
 
+\section{Windrichtungssensor}
+Auf dem Markt gibt es erstaunlich wenige Windrichtungsmesser welche für dieses Projekt anwendbar wären. Manche sind zu gross, manche brauchen Energiemengen welche mir auf einem Boot nicht zur Verfügung stehen und wiederum andere sind schlichtweg zu teuer. Daher ist die entscheidung gefallen einen solchen, efizienten jedoch möglichst kostengünstigen Sensor zu entwickeln.
+Auf dem Markt lassen sich vorallem zwei typen von Windrichtungssensoren um die Richtung des Windes digital festzuhalten. Zum einen wären das Sensoren welche mithilfe eines pontiometer funktionieren und zum andere sind es die, welche einen hall sensor verwenden. Der erstere ist mechanisch deutlich einfacher umzusetzen, da man lediglich einen kleinen flügel an einem Potentiometer befestigt. Die Position kann dann über einen Analogen Input pin auf einem Microcontroller eingelsen werden.
+\\
+Die zweite Option sind hall Sensoren, mit welchen man typischerweise Stärke von Magneten misst. Um die Rotation eines Objektes mittels hallsensoren festzustellen gibt es 2 Möglichkeiten. Bei der ersten variante plaziert man um ein abwechselnd magnetisch positiv und magnetisch positiv geladenes rundes objekt eine belibige Anzahl an Hall sensoren um somit die Rotation zu messen. Jedoch ist es domit schwer einen genaue Position zu ermitteln zum einen aufgrund der Auflösung der Sensoren. 16 Sensoren bedeuten 360/16 grad akkuraität.  Die Zweite und deutlich veilversprechendere Option sind sogenannten Rotary Hall Sensors. Inmeinem Fall verwende ich einen AS5040-ASST mit einem Adapterbord um nicht smd (surface mount device) löten zu müssen, da es dieses Bauteil nicht als thd (through hole device) gibt. Dieser Sensor ist sehr günstig und lässt sich zwischen 5-10 CHF auf verschiedenen Internetseiten aus China finden. 
 
 \section{Sensoren und Aktuatoren}
 \section{Sicherheitsmechanismen und Redundanz }
