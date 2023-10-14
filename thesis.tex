@@ -6,7 +6,7 @@
 
 % Electronic version that does not waste space
 \documentclass[11pt,a4paper,openany,oneside]{memoir}
-
+\usepackage{glossaries}
 % Printable version that does waste space (but people like it), uncomment for printing. Only use for printing
 %\documentclass[11pt,a4paper]{memoir}
 
@@ -21,6 +21,7 @@
 
 % uft8 is the standard for web. Use this (alternative utf8x if you run into issues)
 \usepackage[utf8]{inputenc}
+
 
 %% excellent Palatino font.  Do not change this.
 \usepackage[sc]{mathpazo}
@@ -55,7 +56,7 @@
 
 %% Helpful macros.
 \input{kue-template/macrosetup}
-
+\makeglossaries
 % Template v2: BibLaTeX with Biber backend are in my opinion best maintainable citation configurations. IEEE style is common in CS.
 
 % Bibliography
@@ -76,7 +77,7 @@ backend=biber
 %% ====================
 
 \title{Bau und Konstruktions eines Autonomen Segelboots für den Einsatz auf Binnenseen}
-\author{Georg Niggli}
+\author{Georg Alejandro Niggli}
 \thesistype{Maturaarbeit}
 \advisors{Betreung: Dr. Carola Ebenhoch}
 \department{Fachschaft Physik}
@@ -103,22 +104,33 @@ backend=biber
 \mainmatter
 
 %% Your real content!
+%\setkeys{Gin}{draft} %% Romves all images for faster compile time
 \input{kapitel/einleitung}
 \input{kapitel/literaturübersicht}
 \input{kapitel/konzeptentwicklung}
 \input{kapitel/konstruktion}
-\input{kapitel/autonomie}
 \input{kapitel/elektronik}
+\input{kapitel/autonomie}
 \input{kapitel/herstellung}
 \input{kapitel/tests}
 \input{kapitel/diskussion}
 \input{kapitel/fazit}
 \input{kapitel/danksagung}
 
+\printglossary
+\input{glossary}
+
 \printbibliography
 
 \appendix
 \input{appendix/test}
+\input{appendix/algorythmus}
+
+
+
+
+
+
 
 
 

@@ -6,17 +6,17 @@
 %% Make document internal hyperlinks wherever possible. (TOC, references)
 %% This MUST be loaded before cleveref
 \usepackage[linkcolor=black,colorlinks=true,citecolor=black,filecolor=black]{hyperref}
-
+\usepackage[acronym]{glossaries}
 %% [REC] Intelligent cross reference package. This allows for nice
 %% combined references that include the reference and a hint to where
 %% to look for it.
 %% Template v2: cleveref already recognizes what is being referenced - one does not need to write Fig./Sec.
 % \usepackage{varioref}. Capitalization is prefered in CS
 \usepackage[capitalise]{cleveref}
-
+\usepackage{algpseudocode}
 %% [OPT] Easily changeable quotes with \enquote{Text}
 \usepackage[german=swiss]{csquotes}
-
+\usepackage{algorithm}
 %% Template v2: this prevents warning "Package fmtcount Warning: \ordinal already defined use \FCordinal instead. on input line". See https://tex.stackexchange.com/questions/162353/memoir-class-conflict-with-datetime#comment371926_162358
 \let\ordinal\relax
 %% [REC] Format dates and time depending on locale
