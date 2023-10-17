@@ -35,57 +35,65 @@ Aufgrund des einfachen Prototypen wurde die Prgrammiersprache Python gewählt. I
 Für dieses Projekt wurden Verschiedene Algorithmen untersucht, welche für diese Anwendung denkbar wären.
 
 \subsection{Deep reinforcement learning}
-Deep reinforcement learning ist ein Algorithmus aus der Familie des Maschinellen Lernen. Die Besonderheit hierbei ist, dass dieser keine Trainingsdaten benötigt. Dafür wird ein "Agent" in eine Virtuelle Umgebung gesetzt wobei dieser ein Ziel erfüllen muss uns gewisse Freiheitsgrade zur Bewegung hat. Wenn dieser Agent einen Fortschritt macht, wird dieser belohnt. Macht dieser ein Fehler, wird er bestraft. 
-Der Nachteil von diesem Ansatz ist, dass dieser nur begrenzt ausserhalb seiner trainierten Umgebung zurechtweiss und dass die Bewegungen eines Segelboots sehr schwer in einer Virtuellen Umgebung zu simulieren sind.
+Deep reinforcement learning ist ein Algorithmus aus der Familie des Maschinellen Lernen. Die Besonderheit hierbei ist, dass dieser im Vergleich zum gewöhnlichen Maschinellen lernen, keine Trainingsdaten benötigt. Hingegen wird ein "Agent" (Hier wäre dass, das Segelboot) in eine Virtuelle Umgebung gesetzt welcher ein Ziel erreichen muss und gewisse Freiheitsgrade zur Bewegung hat. Wenn dieser Agent einen Fortschritt macht, wird dieser belohnt. Macht dieser ein Fehler, wird er bestraft. 
+Der Nachteil von diesem Ansatz ist, dass dieser nur begrenzt ausserhalb seiner trainierten Umgebung zurechtweiss und dass die Bewegungen eines Segelboots sehr schwer in einer Virtuellen Umgebung zu simulieren sind. Eine ansatzweise akurate Simulation würde den Rahmen dieser Arbeit sprengen.
 
-\subsection{Potential Fields} 
-Potential Fields ist ein Algorithmus aus der Familie des Pathfindings.
+\subsection{Künstliche Potentialfelder} 
+Der Algorithmus der Künstlichen Potentialfelder ist eine Methode zur Pfadfindung welche in der Robotik verbreitet ist. Der Algorithmus ermöglicht es, einen Weg zu finden, indem er auf anziehende und abstossende Felder reagiert, ähnlich wie dies in der Physik mit elektrischen Feldern geschieht.
+Das Ziel des Algorithmus ist es eine Richtung zu finden, in welche das Boot fahren soll um vom Ausgangspunkt zu einem Zielpunkt zu gelangen. Dabei übt der Zielpunkt eine anziehende Kraft auf das Objekt aus, während Hindernisse eine abstossendend Wirken. Mathematisch kann dies als Gradient dargestellt werden, bei dem die anziehende Kraft einen negativen Gradienten aufzeigt, der das Objekt zum Ziel zieht, und die abstoßende Kraft einen positiven Gradienten erzeugt, der das Objekt von Hindernissen abstosst.
+Der Gravierende Nachteil von diesem Ansatz sind Lokale Minima in welchen der Algorithmus stecken bleiben kann und dies auch tut. Überprüft wurde der Ansatz erklärt in Line following for an autonomous sailboat using potential ﬁelds method \cite{inproceedings} welcher sich als effizient für offene Gewässer jedoch ungünstig für engere Gewässer herausstellt. 
 
-Artificial potential fields ist ein Algorithmus  welcher einen Weg mit anziehnden und abstossenden Felder findet. Es lässt sich sehr einfach mit elektrischen Feldern vergleichen in dem man sich vorstellt, dass das ein Elektron bzw. Proton sich auf einer Fläche befindet. Das Ziel, sprich der Ort an welches das Boot am Ende sein sollte, übt eine anziehende Kraft aus. Jegliche Hindernisse üben eine Abstossende Kraft aus. Mathematisch lässt sich dies als ein Gradient darstellen, wobei anziehend einen, relativ zum Segelboot, sinkenden Verlauf darstellen und Abstossende einen steigenden verlauf darstellen.
-
-sich für ein Wegpunkte basiertes System entscheiden. Somit gibt es einen klar definierten Anfangspunkt und einen klar definierter Endpunkt. Dies hat den Vorteil, dass so Bereiche welche besonders interessant sind sicher besucht werden, da der genaue weg aufgrund von den limitationen des Segelns nicht im Vorhinein definiert werden kann. \\
-Daher muss ein Algorithmus entwickelt werden, welcher trotz Gegenwind einen Punkt erreichen kann. Der folgende Algorithmus wird im Anschluss genauer erläutert
-
-\begin{algorithm}
-\caption{Berechne neuen Kurs}
-\begin{algorithmic}[1]
-\Function{BerechneNeuenKurs}{$\vec{v}_{\text{Boot}}, \vec{v}_{\text{Wind}}, \vec{v}_{\text{Ziel}}$}
-    \State $\text{Skalarprodukt} \gets \vec{v}_{\text{Wind}} \cdot \vec{v}_{\text{Boot}}$
+\subsection{Vektorbasiertes Navigieren}
+Da sich die meisten bereits vorhandenen Algorithmen rein um die Überqueerung von Ozeanen oder die Navigierung auf grossen Gewässern beschäftigen, welche mit anderen Phänomenen wie das Planen mit Wetterkarten beschäftigen, welche für dieses Boot nicht relevant sind wird sich entschieden für dieses Boot einen eigener Algorithmus entwickelt. Dieser basiert auf den Grundlagen der Linearen Algebra und lässt sich somit mit reiner Gymnasialmathematik beschreiben. Ähnlich wie beim Algorithmus der Künstlichen Potentialfelder wird bei jeder Berechnungsiteration der Kurs neu berechnet. \\
+Bevor etwas berechnet werden kann müssen einige Werte bekannt sein. 
+\begin{itemize}
+    \item Position des Bootes (Längengrad und Breitengrad)
+    \item Position des Ziels (Längengrad und Breitengrad)
+    \item Windrichtung (als normalisierter Vektor)
+    \item Richtung des Bootes (als normalisierter Vektor)
     
-    \State $\vec{neuerKurs} \gets \vec{v}_{\text{Ziel}}$
-    
-    \If{$\text{Skalarprodukt} < -0.8$}
-        \If{$\vec{v}_{\text{Wind}} \cdot \vec{v}_{\text{Ziel}} > -0.8$}
-            \State $\vec{neuerKurs} \gets \vec{v}_{\text{Ziel}}$
-            \State \Return \Call{Normalisiere}{$\vec{neuerKurs}$}
-        \EndIf
-        
-        \State $n \gets 0$
-        \While{$\vec{v}_{\text{Wind}} \cdot \vec{neuerKurs} < -0.8$ \textbf{und} $n < 1$}
-            \State $n \gets n + 0.1$
-            \State $\vec{neuerKurs1} \gets \vec{v}_{\text{Ziel}} + n \cdot \begin{bmatrix}0 & -1 \\ 1 & 0\end{bmatrix} \cdot \vec{v}_{\text{Ziel}}$
-            \State $\vec{neuerKurs2} \gets \vec{v}_{\text{Ziel}} + n \cdot \begin{bmatrix}-1 & 0 \\ 0 & 1\end{bmatrix} \cdot \vec{v}_{\text{Ziel}}$
-            
-            \If{$\vec{neuerKurs1} \cdot \vec{v}_{\text{Ziel}} > \vec{neuerKurs2} \cdot \vec{v}_{\text{Ziel}}$}
-                \State $\vec{neuerKurs} \gets \vec{neuerKurs1}$
-            \Else
-                \State $\vec{neuerKurs} \gets \vec{neuerKurs2}$
-            \EndIf
-        \EndWhile
-        
-        \State \Return \Call{Normalisiere}{$\vec{neuerKurs}$}
-    \EndIf
-\EndFunction
-\end{algorithmic}
-\end{algorithm}
- 
+\end{itemize}
 
+Jegliche Vektoren werden nur normalisiert verwendet. Als erstes wird der Ziel-Vektor $\Vec{v_{Ziel}}$ welcher als $$\Vec{v_{Ziel}} = \text{Position Ziel - Position Boot}$$ definiert ist. Im Anschluss wird der neue Kurs provisorisch auf diesen Vektor gesetzt.
+Danach wird das Skalarprodukt zwischen $\Vec{v_{Wind}}$ und $\Vec{v_{Boot}}$ als $$\text{Skalarprodukt} = \Vec{v_{Wind}} \cdot \Vec{v_{Boot}}$$ berechnet. Dieses gibt Auskunft wie die beiden Vektoren zueinander stehen. Ist der Wert 1, zeigen die beiden Vektoren in die gleiche Richtung und der Wind kommt von Hinten. Ist der Wert jedoch -1 stehen die beiden Vektoren entgegengesetzt zu einander und es lässt sich daraus schliessen, dass dieser Kurs nicht besegelbaar ist, da das Boot im Wind stehen würde. Ist dies der Fall werden zwei weitere Vektoren berechnet, welche normal zu $\Vec{v_{Ziel}}$ stehen. 
+
+$$\vec{\text{Möglicher Kurs A}} = \vec{v}_{\text{Ziel}}  \cdot \begin{bmatrix}0 & -1 \\ 1 & 0\end{bmatrix} $$
+$$\vec{\text{Möglicher Kurs B}} = \vec{v}_{\text{Ziel}} \cdot \begin{bmatrix}-1 & 0 \\ 0 & 1\end{bmatrix} $$
+
+Diese beiden Kurse werden nun stückweise wieder Richtung Zielvektor "zugeklappt" 
+
+$$\vec{\text{Möglicher Kurs A}} \gets \vec{v}_{\text{Ziel}} + n \cdot \begin{bmatrix}0 & -1 \\ 1 & 0\end{bmatrix} \cdot \vec{v}_{\text{Ziel}}$$
+$$\vec{\text{Möglicher Kurs B}} \gets \vec{v}_{\text{Ziel}} + n \cdot \begin{bmatrix}-1 & 0 \\ 0 & 1\end{bmatrix} \cdot \vec{v}_{\text{Ziel}}$$
+wobei n eine iterierende Variable ist welche bei 0 anfängt und in 0.1 Schritten grösser wird, bis kurz bevor der Vektor im Wind steht bzw. der Kurs Amwind erreicht ist. \\
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{algorythmus Vektoren.png}
-    \caption{Visualisierung}
+    \caption{Visualisierung der beiden möglichen Pfade}
     \label{fig:enter-label}
 \end{figure}
+Nun wird wieder mithilfe des Skalarprodukts überprüft, welcher der beiden Kurs-Vektoren näher am Ziel-Vektor ist der dann als nächsten Kurs bestimmt. Der Algorithmus ist ebenfalls im \cref{appendix:algorythmus} nochmals als ganzes zu finden.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{assets/3.png}
+    \caption{Matplotlib Visualisierung des Algorithmus}
+    
+\end{figure}
+
+\section{Motorsteuerung}
+Wie im Kapitel Elektronik bereits erwähnt, werden zwei Aktuatoren verwendet. Beide lassens ich nur einen 5V plus zwischen 1ms und 2ms auf eine gewünschte Position setzen. 
+
+\subsection{Ruder}
+Für das Ruder wird ein PD (Proportional Derivative) Controller verwendet. Auf den Integralen bestandteil kann verzichtet werden, da es sich bei diesen Bewegungen um keine schnellen Bewegungen handelt. 
+Um das Ruder auf die gewünsche Position zu stellen, wird als erstes der "Fehler" bzw. der Unterschied zwischen der Aktuellen Ausrichtung und der Gewünschten Ausrichtung berechnet. 
+%%% PD controller weiter erklären
+
+\subsection{Segel}
+Da das Segel nicht über besonders viele Trimmmöglichkeiten verfügt und die Schnelligkeit wie anfangs erwähnt kein bedeutender Faktor für diese Arbeit ist, wird das Flap immer in die Richtung des Windes gedreht. Dies sorgt dafür, dass das Segel in eine Segelbare Position gebracht wird 
+
+%%%% VISUALISIERUNG 
+
+ 
+
 
 
 

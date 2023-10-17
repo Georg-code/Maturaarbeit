@@ -1,10 +1,41 @@
 \chapter{Algorithmus}
 \label{appendix:algorythmus}
 
-Der Algorithmus ist so aufgebaut, dass er das Boot trotz Gegenwind ans Ziel bringen könnte. Die Hauptfunktion berechnet dafür die nächste Richtung in welche das Boot fahren sollte.
 
 
 
 
 
 
+\begin{algorithm}
+\caption{Berechne neuen Kurs}
+\begin{algorithmic}[1]
+\Function{BerechneNeuenKurs}{$\vec{v}_{\text{Boot}}, \vec{v}_{\text{Wind}}, \vec{v}_{\text{Ziel}}$}
+    \State $\text{Skalarprodukt} \gets \vec{v}_{\text{Wind}} \cdot \vec{v}_{\text{Boot}}$
+    
+    \State $\vec{neuerKurs} \gets \vec{v}_{\text{Ziel}}$
+    
+    \If{$\text{Skalarprodukt} < -0.8$}
+        \If{$\vec{v}_{\text{Wind}} \cdot \vec{v}_{\text{Ziel}} > -0.8$}
+            \State $\vec{neuerKurs} \gets \vec{v}_{\text{Ziel}}$
+            \State \Return \Call{Normalisiere}{$\vec{neuerKurs}$}
+        \EndIf
+        
+        \State $n \gets 0$
+        \While{$\vec{v}_{\text{Wind}} \cdot \vec{neuerKurs} < -0.8$ \textbf{und} $n < 1$}
+            \State $n \gets n + 0.1$
+            \State $\vec{neuerKurs1} \gets \vec{v}_{\text{Ziel}} + n \cdot \begin{bmatrix}0 & -1 \\ 1 & 0\end{bmatrix} \cdot \vec{v}_{\text{Ziel}}$
+            \State $\vec{neuerKurs2} \gets \vec{v}_{\text{Ziel}} + n \cdot \begin{bmatrix}-1 & 0 \\ 0 & 1\end{bmatrix} \cdot \vec{v}_{\text{Ziel}}$
+            
+            \If{$\vec{neuerKurs1} \cdot \vec{v}_{\text{Ziel}} > \vec{neuerKurs2} \cdot \vec{v}_{\text{Ziel}}$}
+                \State $\vec{neuerKurs} \gets \vec{neuerKurs1}$
+            \Else
+                \State $\vec{neuerKurs} \gets \vec{neuerKurs2}$
+            \EndIf
+        \EndWhile
+        
+        \State \Return \Call{Normalisiere}{$\vec{neuerKurs}$}
+    \EndIf
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
