@@ -4,7 +4,7 @@
 \label{chap:elektronik}
 
 \section{Das Gehirn des Bootes}
-Für die Steuerung des Bootes wird ein Raspberry Pi 3B+ verwendet. Dieser verfügt über ausreichend Leistung um alle notwendigen Berechnungen in Echtzeit durchzuführen. Auf dem Rasperry Pi läuft eine Debian GNU/Linux Distribution. Im Kapitel Autonomie wird auf die Softwarearchitektur jedoch genauer eingeangen.
+Für die Steuerung des Bootes wird ein Raspberry Pi Zero W 1.1 verwendet. Dieser verfügt über ausreichend Leistung um alle notwendigen Berechnungen in Echtzeit durchzuführen. Auf dem Rasperry Pi läuft ein Debian basiertes GNU/Linux Betriebssystem. Im Kapitel Autonomie wird auf die Software jedoch genauer Eingeangen.
 
 \begin{figure}[H] 
   \centering
@@ -26,6 +26,8 @@ Zur Bestimmung des aktuellen Standorts wird das Modul Neo 7M von Whadda verwende
     \label{fig:gps}
 \end{figure}
 
+\subsection{Gyro und Magnetometer}
+Kränung
 \subsection{Aktuatoren}
 Für die Bewegung der Elemente wurden L16-100-63-6-R Aktuatoren von Actuonix verwendet. Diese sind für den Robotik ausgelegt und Wasserdicht, was sie für diese Anwendung perfekt macht. Diese werden für das Ruder und das Segel verwendet. Mit 6V (und 5V) können sie betrieben werden und haben eine 63:1 Übersetzung. Dies macht sie nicht besonders schnell, jedoch erfüllen sie laut Hersteller die erforderliche Kraft.
 Sie verfügen über kein Positionsfedback, sprich digital kann nicht abgefragt werden an welcher Position sich der "Stab" gerade befindet jedoch können konkrete Distanzen angesteuert werden. Verbunden wird der Aktuator mit dem einem Vcc und einer Ground Verbindung. Über eine einzige Datenverbindung können kurze Impulse zwischen 1ms-2ms gesendet werden, wobei 1ms die Startposition ist und der Aktuator bei 2ms voll ausgefahren wird. Um Einstellungen dazwischen zu erhalten, kann ein Wert zwischen 1ms und 2ms gesendet werden.  

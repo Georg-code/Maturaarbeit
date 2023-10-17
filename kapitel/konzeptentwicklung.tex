@@ -3,7 +3,7 @@
 \label{chap:konzeptentwicklung}
 
 
-Es wird ein Boot konstruiert und gebaut, welches über die Mittel der Autonomen Navigation verfügt. Dabei steht vorallem die Konstruktion des Bootes im Vordergrund.
+Es wird ein Boot konstruiert und gebaut, welches u¨ber die Mittel zur auto- nomen Navigation und Steuerung verfu¨gt. Dabei steht vor allem die Konstruktion des Bootes im Vordergrund.(Nur in diesem Schritt oder generell) Es geht hier um Entwurf vs. Bau.
 
 \section{Anforderungsanalyse}
 Das Boot muss über 
@@ -13,16 +13,33 @@ Um eine Richtung und Einsatzbereich zu finden, wird als erstes die Literatur in 
 
 
 \section{Energie}
-Da das Segelboot eine "inteligente" Komponente haben sollte, braucht dieses elektrischen Strom um die Komponenten mit Energie zu versorgen. Da das Segelboot vollkommen Autonom funktionieren soll ist es sinnvoll diese auf dem Schiff zu generieren. In frage kommen dabei drei Systeme. Zum einen die Generierung von Elektrischem Strom mithilfe von Wasserkraft.
-Da sich das Boot im Wasser bewegt, wäre es möglich eine kleine Turbine im Wasser zu Platzieren. Da sich das Wasser relativ zum Boot bewegt sind die gleichen prinzipien wie bei Generierung von Wasserkraft anzuwenden. \\
-Diese Methode hat jedoch auch Nachteile. Zum ist das Segelboot auf geringe Geschwindigkeiten ausgelegt. Da die Leistung einer Turbine in einem Fluid kubisch ansteigt wäre es nur möglich geringe Mengen zu Produzieren. Zudem würde dies das Boot noch weiter ausbremsen. Ähnliche Probleme hat ebenfalls die Generierung von elektrischem Strom mithilfe von Windkraft. Zudem wäre die Mechanik hinter einer solchen Anlage sehr komplex da sich diese immer zum Wind drehen müsste, die Balance des Schiffes schaden würde und wenig Ertrag liefern würde.
-Daher bleibt noch die Photovoltaik. Die Energieerzeugung mittels Solaranlagen ist auf Segelbooten äusserst bleibt, da es keinen zusätzlichen Widerstand bringt. Der gravierende Nachteil ist jedoch, dass der Sonnenzyklus und das Wetter einen entscheidenden Einfluss auf die Energiegewinnung haben. An einem sonnigen Tag sind diese sehr ergiebig, wobei in der Nacht kein Strom generiert werden kann.
+Da das Segelboot seine Position selbständig bestimmen und den Weg ins Ziel finden soll, muss es über ¨ınteligente” Komponenten verfügen, braucht dieses elektrischen Strom um die Komponenten mit Energie zu versorgen. Da das Segelboot vollkommen autonom funktionieren soll, muss diese auf dem Schiff selbst gewonnen werden. In Frage kommen dabei grundsätzlich drei Energiequellen, nämlich Wasserenergie, Windenergie und Sonnenenergie. 
 
+\subsection{Wasserturbine}
+Da sich das Boot im Wasser bewegt, könnte eine kleine Wasserturbine am Bootskörper befestigt und die Strömung zu deren Antrieb genutzt werden. Da sich das Boot relativ zum Wasser bewegt, gelten die gleichen Prinzipien wie bei Generierung elektrischer Energie durch Wasserkraft in Fliessgewässern.
 
+Diese Methode hat jedoch gewichtige Nachteile. Segelboote erreichen, abgesehen von speziellen Konstruktionen wie sog. Foilingboote, bei denen der Bootskörper bei Fahrt vollständig aus dem Wasser gehoben wird, nur bescheidene Geschwindigkeiten. Da die Leistung einer Turbine in einer Flüssigkeit bei gleicher Fläche kubisch zur Strömungsgeschwindigkeit ansteigt, erlaubt diese Methode selbst bei idealen Segelbedingungen nur eine geringe Energieausbeute. Zudem wu¨rde das Segelboot durch die Turbine empfindlich abgebremst. 
 
-Da das Segelboot vollkommen autonom funktionieren soll, muss die Energieversorgung von Anfang an beachtet werden. Daher wurde ein Konzept entwickelt um das Segelboot mit Solarenergie zu versorgen. Dies beinhaltet einen Akku welcher über genügend Kapazität verfügen muss. \\
-Da sich sehr schnell herausstellt, dass im Handel verfügbare Powerbanks für diese Anwendung unbrauchbar sind. Dies liegt daran, dass kaum eine Powerbank "pass trough loading" unterstützt. Diese Technonologie kennt man in der Regel nur von einem UPS (Uninteruppted Power Supply). Ein solches ist jedoch in der Grössenskala sehr schwer zu erwerben. 
+\subsection{Windturbine}
+Auch die Generierung von elektrischer Energie mithilfe einer Windturbine unter Nutzung der Windkraft ist nicht praktikabel. Um die Windenergie in Bewegungsenergie umzusetzen, aus der dann elektrische Energie generiert werden kann, muss ein Windrad in den Wind gedreht werden. Ein Segelboot kann keinen Kurs gegen den Wind segeln. Der Kurs vor dem Wind (also ein Kurs, bei dem der Wind von hinten auf das Boot trifft) ist zwar möglich, aber wenig effizient. Ein Windrad könnte folglich nicht fix mit dem Boot verbunden werden, sondern müsste drehbar ausgelegt werden, damit es unabhängig vom Kurs des Bootes in den Wind gedreht werden kann. Es müsste so platziert werden, dass nicht nur eine Berührung des Segels, sondern auch eine Berührung der Wasseroberfläche bei einer Kränkung (Schieflage) des Bootes ausgeschlossen ist. Damit müsste es am äussersten Bug, am äussersten Heck oder auf dem Mast platziert werden. Alle Positionen verbieten sich, da damit die Balance des Bootes akut gefährdet wäre. 
 
+Schliesslich würde eine Positionierung am Bug oder Heck, je nach vorherrschendem Wind, zu einer vollen oder teilweisen Abschattung des Windrades durch das Segel oder des Segels durch das Windrad führen. Eine Positionierung auf dem Mast würde selbst im Fall eines Vertikalwindrades zu Verwirbelungen führen, welche die Segeleigenschaften des Bootes negativ beeinträchtigen würden. 
+
+Einfluss auf den Kurs, da das Boot nicht verankert ist. Damit geht Energie verloren, da das Boot „weggeschoben“ wird, statt die Windenergie in nutzbare Drehung umzutzen.
+
+\subsection{Photovoltaik}
+Für die Nutzung der Sonnenenergie kommt nur die Methode der Photovoltaik in Frage. Die für den Betrieb von Wärme-Kraft-Maschinen erforderlichen Temperaturen lassen sich auf einem beweglichen Boot mit Sonnenenergie nicht erreichen.
+
+Die Energieerzeugung mittels Photovoltaikanlagen ist auf Segelbooten bliebt und verbreitet. Solche Anlagen haben keinen Einfluss auf die Segeleigenschaften des Bootes. Die Energieausbeute hängt aber stark vom Sonnenstand und dem vorherrschenden Wetter ab. Im Gegensatz zu stationären Anlagen lassen sich Photovoltaikanlagen auf Booten nicht ideal auf die Sonne ausrichten und können je nach Kurs sogar vom Segel beschattet werden. Da während der Nachstunden überhaupt keine Energie gewonnen werden kann, muss das Boot zur Überbrückung zwingend mit einem Energiespeicher ausgerüstet werden.
+
+\subsection{Enegiespeicher}
+Da das Segelboot vollkommen autonom funktionieren soll, muss die Ener- gieversorgung von Anfang an beachtet werden. Daher wurde ein Konzept entwickelt um das Segelboot mit Solarenergie zu versorgen. Dies beinhaltet einen Akku welcher u¨ ber genu¨ gend Kapazita¨t verfu¨ gen muss.
+
+Da sich sehr schnell herausstellt, dass im Handel verfu¨ gbare Powerbanks fu¨ r diese Anwendung unbrauchbar sind. Dies liegt daran, dass kaum eine Powerbank ”pass trough loadingu¨ nterstu¨ tzt. Diese Technonologie kennt man in der Regel nur von einem UPS (Uninteruppted Power Supply). Ein solches ist jedoch in der Gro¨ ssenskala sehr schwer zu erwerben. (Nein , diese sollen einen Netzausfall abfedern
+
+Diskussion der verschieden Typen (Bleiakku, LiPo etc
+
+ 
 
 \section{Windrichtungssensor}
 

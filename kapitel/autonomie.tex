@@ -12,10 +12,9 @@ Grundsätzlich unterscheidet man in 5 Kurse bzw. Segelstellungen.
     \item Im wind: Wenn der Wind von Vorne kommt.
     \item Halbwind: Wenn der Wind von $\pm$ 90$^{\circ}$ zum Boot kommt. (\textbf{U})
     \item Raumschot: Wenn der Wind schräg von hinten kommt. (\textbf{S})
-    \item Vorwind: Wenn der Wind schräg von vorne kommt. (\textbf{S})
+    \item Amwind: Wenn der Wind schräg von vorne kommt. (\textbf{S})
 \end{itemize}
 % TODO Bild von Segelstellungen
-
 Davon sind alle ausser \textit{Im Wind} besegelbaar. Dies liegt daran, dass wenn der Wind von vorne kommt, dieser nicht vom Segel aufgefangen wird. Dieser Bereich wird als \textit{No Go Zone} bezeichnet und ist je nach Boot $\approx 90^{\circ}$. Auf den anderen Kursen wird das Boot entweder durch das Stossprinzip (\textbf{S}) angetrieben oder durch Umstörmung (\textbf{U}) was sehr Ähnlich wie bei Flügeln von Flugzeugen oder Rotorblättern von Windrädern funktioniert.  
 \subsection{Wind}
 Es ist Wichtig zwischen dem wahren Wind und dem scheinbaren Wind zu unterscheiden. Der wahre Wind kommt aus der echten Richtung. Wenn man auf die Messdaten eines Stationären Windsensors schaut, wird man den wahren Wind ablesen können. Der Scheinbare Wind hingegen ist ein Zusammensetzung aus dem wahren Wind und dem Fahrtwind. Wenn im Segeln von der Windrichtug gesprochen wird, meint man in der Regel den scheinbaren Wind, da miest nur dieser von Bedeutung ist. 
@@ -33,7 +32,18 @@ Aufgrund des einfachen Prototypen wurde die Prgrammiersprache Python gewählt. I
 
 
 \section{Navigation}
-Für dieses Projekt wurde sich für ein Wegpunkte basiertes System entscheiden. Somit gibt es einen klar definierten Anfangspunkt und einen klar definierter Endpunkt. Dies hat den Vorteil, dass so Bereiche welche besonders interessant sind sicher besucht werden, da der genaue weg aufgrund von den limitationen des Segelns nicht im Vorhinein definiert werden kann. \\
+Für dieses Projekt wurden Verschiedene Algorithmen untersucht, welche für diese Anwendung denkbar wären.
+
+\subsection{Deep reinforcement learning}
+Deep reinforcement learning ist ein Algorithmus aus der Familie des Maschinellen Lernen. Die Besonderheit hierbei ist, dass dieser keine Trainingsdaten benötigt. Dafür wird ein "Agent" in eine Virtuelle Umgebung gesetzt wobei dieser ein Ziel erfüllen muss uns gewisse Freiheitsgrade zur Bewegung hat. Wenn dieser Agent einen Fortschritt macht, wird dieser belohnt. Macht dieser ein Fehler, wird er bestraft. 
+Der Nachteil von diesem Ansatz ist, dass dieser nur begrenzt ausserhalb seiner trainierten Umgebung zurechtweiss und dass die Bewegungen eines Segelboots sehr schwer in einer Virtuellen Umgebung zu simulieren sind.
+
+\subsection{Potential Fields} 
+Potential Fields ist ein Algorithmus aus der Familie des Pathfindings.
+
+Artificial potential fields ist ein Algorithmus  welcher einen Weg mit anziehnden und abstossenden Felder findet. Es lässt sich sehr einfach mit elektrischen Feldern vergleichen in dem man sich vorstellt, dass das ein Elektron bzw. Proton sich auf einer Fläche befindet. Das Ziel, sprich der Ort an welches das Boot am Ende sein sollte, übt eine anziehende Kraft aus. Jegliche Hindernisse üben eine Abstossende Kraft aus. Mathematisch lässt sich dies als ein Gradient darstellen, wobei anziehend einen, relativ zum Segelboot, sinkenden Verlauf darstellen und Abstossende einen steigenden verlauf darstellen.
+
+sich für ein Wegpunkte basiertes System entscheiden. Somit gibt es einen klar definierten Anfangspunkt und einen klar definierter Endpunkt. Dies hat den Vorteil, dass so Bereiche welche besonders interessant sind sicher besucht werden, da der genaue weg aufgrund von den limitationen des Segelns nicht im Vorhinein definiert werden kann. \\
 Daher muss ein Algorithmus entwickelt werden, welcher trotz Gegenwind einen Punkt erreichen kann. Der folgende Algorithmus wird im Anschluss genauer erläutert
 
 \begin{algorithm}
@@ -80,16 +90,6 @@ Daher muss ein Algorithmus entwickelt werden, welcher trotz Gegenwind einen Punk
 
 
 
-\section{Pathfinding}
-
-
-\subsection{Deep reinforcment}
-Der einzige Algorithmus aus der Familie des Maschinellen lernen ist Deep reinforcement. Da für das Training von ML algroythmen in de Regel umfangreiche Datensets verwenden müssen ist dies bedeutend schwer. Der Vorteil am Deep reinforcment ist dass dafür anfänglich keine Traingsdaten geben muss, da er sich diese durch "trail and error" selbst erlernt. Dafür muss eine virtuelle Umgebung geschaffen werden, wo man einem Roboter gewisse DOF gibt. Mit den gegeben Freiheiten wird versucht das gegebene Ziel möglichst Zeiteffizienz zu bewältigen. Trainiert wird es ganz ähnlich wie wir es von der Erziehung von Kindern kennen. Wenn die Neuronale Netz einen Fortschritt erreicht wird diese durch Punkte belohnt. Ganz im Gegenteil werden, bei Handlungen welche sich negativ auf das Ergebnis auswirken, Bestrafungen ausgesprochen.
-
-\subsection{(Artifical) Potential Fields }
-Artificial potential fields ist ein Algorithmus  welcher einen Weg mit anziehnden und abstossenden Felder findet. Es lässt sich sehr einfach mit elektrischen Feldern vergleichen in dem man sich vorstellt, dass das ein Elektron bzw. Proton sich auf einer Fläche befindet. Das Ziel, sprich der Ort an welches das Boot am Ende sein sollte, übt eine anziehende Kraft aus. Jegliche Hindernisse üben eine Abstossende Kraft aus. Mathematisch lässt sich dies als ein Gradient darstellen, wobei anziehend einen, relativ zum Segelboot, sinkenden Verlauf darstellen und Abstossende einen steigenden verlauf darstellen.
-\\ 
-Mit hilfe eines Gradient descent Algorythmus, welcher prinzipiell nur die richtung mit der höchsten negativen Steigung sucht, ist der Weg der das Segelboot zu nehmen hat.
 
 
 
