@@ -1,5 +1,5 @@
 
-\chapter{Autonomie}
+\chapter{Navigation}
 \label{chap:autonomie}
 
 
@@ -31,8 +31,8 @@ Alle für das Boot geschriebenen Programme laufen in Dockercontainer. Docker ist
 Aufgrund des einfachen Prototypen wurde die Prgrammiersprache Python gewählt. Im gegensatz zu sprachen wie C++ oder Rust welche um ein vielfaches performanter wären ist Python sehr langsam. Da die Algorithmen wie später nicht erläuter wird, nicht besonders Komplex sind, macht dies keinen Bedeutenden Unterschied. 
 
 
-\section{Navigation}
-Für dieses Projekt wurden Verschiedene Algorithmen untersucht, welche für diese Anwendung denkbar wären.
+\section{Verbreitete Webfindungsalgroithmen}
+Für dieses Projekt wurden verschiedene Algorithmen untersucht, welche für diese Anwendung denkbar wären.
 
 \subsection{Deep reinforcement learning}
 Deep reinforcement learning ist ein Algorithmus aus der Familie des Maschinellen Lernen. Die Besonderheit hierbei ist, dass dieser im Vergleich zum gewöhnlichen Maschinellen lernen, keine Trainingsdaten benötigt. Hingegen wird ein "Agent" (Hier wäre dass, das Segelboot) in eine Virtuelle Umgebung gesetzt welcher ein Ziel erreichen muss und gewisse Freiheitsgrade zur Bewegung hat. Wenn dieser Agent einen Fortschritt macht, wird dieser belohnt. Macht dieser ein Fehler, wird er bestraft. 
@@ -43,7 +43,7 @@ Der Algorithmus der Künstlichen Potentialfelder ist eine Methode zur Pfadfindun
 Das Ziel des Algorithmus ist es eine Richtung zu finden, in welche das Boot fahren soll um vom Ausgangspunkt zu einem Zielpunkt zu gelangen. Dabei übt der Zielpunkt eine anziehende Kraft auf das Objekt aus, während Hindernisse eine abstossendend Wirken. Mathematisch kann dies als Gradient dargestellt werden, bei dem die anziehende Kraft einen negativen Gradienten aufzeigt, der das Objekt zum Ziel zieht, und die abstoßende Kraft einen positiven Gradienten erzeugt, der das Objekt von Hindernissen abstosst.
 Der Gravierende Nachteil von diesem Ansatz sind Lokale Minima in welchen der Algorithmus stecken bleiben kann und dies auch tut. Überprüft wurde der Ansatz erklärt in Line following for an autonomous sailboat using potential ﬁelds method \cite{inproceedings} welcher sich als effizient für offene Gewässer jedoch ungünstig für engere Gewässer herausstellt. 
 
-\subsection{Vektorbasiertes Navigieren}
+\section{Eigenentwickelter vektorbasierter Ansatz}
 Da sich die meisten bereits vorhandenen Algorithmen rein um die Überqueerung von Ozeanen oder die Navigierung auf grossen Gewässern beschäftigen, welche mit anderen Phänomenen wie das Planen mit Wetterkarten beschäftigen, welche für dieses Boot nicht relevant sind wird sich entschieden für dieses Boot einen eigener Algorithmus entwickelt. Dieser basiert auf den Grundlagen der Linearen Algebra und lässt sich somit mit reiner Gymnasialmathematik beschreiben. Ähnlich wie beim Algorithmus der Künstlichen Potentialfelder wird bei jeder Berechnungsiteration der Kurs neu berechnet. \\
 Bevor etwas berechnet werden kann müssen einige Werte bekannt sein. 
 \begin{itemize}
@@ -79,6 +79,9 @@ Nun wird wieder mithilfe des Skalarprodukts überprüft, welcher der beiden Kurs
     
 \end{figure}
 
+Die Wegpunkte werden Mittels GeoJson bereitgestellt. GeoJson ist grundsätzlich reines Json. Es steht für JavaScript Object Notation und ermöglicht es Objekte von verschienedenen Programiersprachen in einem einheitlichen Format zu speichern. GeoJson ist ein weit verbreitetes Format für Geodaten, da so die Daten standardisiert gespeichert und gelesen werden können.
+Das Ziel und die Wegpunkte werden mit Geojson festgelegt. So können diese in diversen Kartenprogrammen einfach bearbeitet werden.
+
 \section{Motorsteuerung}
 Wie im Kapitel Elektronik bereits erwähnt, werden zwei Aktuatoren verwendet. Beide lassens ich nur einen 5V plus zwischen 1ms und 2ms auf eine gewünschte Position setzen. 
 
@@ -93,7 +96,7 @@ Da das Segel nicht über besonders viele Trimmmöglichkeiten verfügt und die Sc
 %%%% VISUALISIERUNG 
 
  
-
+%%% Bereitstellung der Daten mittels GEOJSON
 
 
 

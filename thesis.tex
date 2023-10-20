@@ -58,7 +58,6 @@
 \input{kue-template/macrosetup}
 \makeglossaries
 % Template v2: BibLaTeX with Biber backend are in my opinion best maintainable citation configurations. IEEE style is common in CS.
-
 % Bibliography
 \usepackage[
 bibstyle=numeric,
@@ -71,12 +70,12 @@ url=true,
 bibencoding=utf8,
 backend=biber
 ]{biblatex} %Imports BibLaTeX package
-\addbibresource{refs.bib} %Import the bibliography file
+\addbibresource{refs.bib}
+\addbibresource{zotero.bib} %Import the bibliography file
 
-%% Document information
 %% ====================
 
-\title{Bau und Konstruktions eines Autonomen Segelboots für den Einsatz auf Binnenseen}
+\title{Entwurf, Konstruktion und Bau eines autonomen Segelboots}
 \author{Georg Alejandro Niggli}
 \thesistype{Maturaarbeit}
 \advisors{Betreung: Dr. Carola Ebenhoch}
@@ -112,7 +111,7 @@ backend=biber
 \input{kapitel/elektronik}
 \input{kapitel/autonomie}
 \input{kapitel/herstellung}
-\input{kapitel/tests}
+%\input{kapitel/tests}
 \input{kapitel/diskussion}
 \input{kapitel/fazit}
 \input{kapitel/danksagung}

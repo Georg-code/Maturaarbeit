@@ -1,49 +1,85 @@
 
 \chapter{Konzeptentwicklung }
 \label{chap:konzeptentwicklung}
+\section{Zielsetzung}
+Das Ziel dieser Arbeit ist es, ein autonomes Segelboot zu entwerfen, zu konstruieren und zu bauen. Dabei soll günstiges und einfach zu verarbeitendes Konstruktonsmaterial verwendet werden, das in Baumärkten erworben werden kann, mit Werkzeugen gearbeitet werden, die in einer gut bestückten Handwerkerwerkstatt vorhanden sind, die Navigation und Steuerung selbst entworfen werden und die dafür notwendigen Programme selbst entwickelt werden. 
 
+Dazu soll mittels eines CAD-Programmes (CAD = Computer Aided Design) computergestützt ein Segelboot entworfen werden, um anschliessend nach den mit dem CAD-Programm erstellten Plänen gebaut zu werden. Das Segelboot soll mit allen zur autonomen Navigation und Steuerung erforderlichen Geräten, Rechnern und Sensoren sowie der zu deren Betrieb erforderlichen autonomen Energieversorgung ausgerüstet werden. Schliesslich soll das Segelboot mit Programmen ausgestattet werden, die es ihm erlauben, bei allen möglichen Windrichtungen den vordefinierten Zielpunkt anzusteuern und selbst bei einer Veränderung der Windrichtung selbständig zu erreichen.
 
-Es wird ein Boot konstruiert und gebaut, welches u¨ber die Mittel zur auto- nomen Navigation und Steuerung verfu¨gt. Dabei steht vor allem die Konstruktion des Bootes im Vordergrund.(Nur in diesem Schritt oder generell) Es geht hier um Entwurf vs. Bau.
+\section{Methodische Vorgehen}
+
+In einem ersten Schritt wird ein Überblick über die bekannten autonomen Segelboote und Segelbootprojekte gewonnen. Danach werden die Anforderungern detailliert analysiert. 
+In einem ersten Teil wird die 
+
+Konzeption, der Entwurf, die Konstruktion und der Bau des Bootskörpers sowie des Segels beschrieben. In einem zweiten Teil wird die
+
+  Im Abschnitt über die technische/elektrische Ausrüstung des Bootes, insbesondere der verwendet Rechner und die Überlegungen zu dessen Wahl, die eingesetzten Sensoren, die Stromversorgungslösung und die Lengsteuerung diskutiert.
+
+ In einem nächsten Teil werden nach einer knappen Einführung in die Grundlagen der Physik des Segelns, die Überlegungen zur Architektur der Naviationssoftware, die Navigation und die Wegfindung diskutiert
+
+ In einem ….. Teil wird der Bau der Bestandteile des Bootskörpers und des Segels und anschliessende Zusammenbau und die Montage beschrieben 
 
 \section{Anforderungsanalyse}
-Das Boot muss über 
-\section{Ideenfindung und Konzeptauswahl}
-Um eine Richtung und Einsatzbereich zu finden, wird als erstes die Literatur in diesem Bereich 
-\section{Erläuterung des ausgewählten Sailflap-Designs}
+Ausgehend von der Zielsetzung werden in einem ersten Schritt die Anforderungen an das autonome Segelboot analysiert und die Kriterien festgehalten, Das Boot muss über
+\begin{itemize}
+    \item stabil schwimmen
+    \item den Wind nutzen
+    \item günstig sein
+    \item steuerbar sein
+    \item an Land mit normalen Motorfahrzeugen an ein Gewässer transportiert werden können
+    \item zwischen 2 und 2,5 m lang sein
+    \item selbständig den Weg ins Ziel finden und ansteuern können
+    \item selbständig mehrere, vorgegebene Ziel in der vorgegebenen Reihenfolge ansteuern können
+    \item über eine autarke Energieversorgung verfügen und über eine Energiereserve von 72 h verfügen 
+    \item muss auf Schweizer Gewässern betrieben werden können
+    \item zwischen 2 und 2,5 m lang sein
+    \item Segelfläche von weniger als 15m2
+    \item Zieleingabe kann drahtlos erfolgen (Wlan)
+    \item     darf eine Länge von 2.5 m nicht überschreiten (wegen Zulassung)
+    \item Muss über einen Namen verfügen und mit dem Namen und der Adresse des Eigentümers versehen sein 
+    \item bei starkem Wellengang und starkem Wind nicht kentern
+    \item sich in einem See bewegen können, ohne auf Grund zu laufen, wenn dem Boot eine Karte des Sees eingespeist wird ????
+\end{itemize}
+
+Kein Fokus auf Geschwindigkeit
+Kein Fokus auf der Ermittlung des schnellsten Weges, um alle vorgegebenen Zielpunkte abzufahren (Problem des Handlungsreisenden)
+Keine Erkennung von Hindernissen wie andere Boote etc.
+ 
+
+\section{Entscheid für eine vollständige Eigenentwicklung}
+Segelboote im Grössenbereich von 2 m bis 2.5 m werden weder kommerziell angeboten noch industriell gefertigt. Für das vorliegende Projekt kann daher nicht auf einen bestehenden Bootstypus zurückgegriffen werden. Ein einfacher Erwerb eines solchen Bootes, um es in ein autonomes Boot umzubauen, würde der Zielsetzung widersprechen, selbst wenn ein entsprechendes Exemplar käuflich erworben werden könnte.
+
+Für Modellbauer werden Bausätze für ferngesteuerte Segelboote angeboten, allerdings nur bis zu einer Gesamtlänge von etwa 1,6 m. Sodann werden Bausätze für bemannte Segelboote wie Optimisten etc. angeboten. Diese kosten aber mehrere tausend Franken und sind ausnahmslos mit Textilsegeln ausgerüstet.  
+Schliesslich werden fertige Baupläne für Modellsegelboote angeboten. Sämtliche angebotenen Pläne sehen Textilsegel vor. Ausserdem erreichen mit ganz wenigen Ausnahmen nicht die erforderlichen Dimensionen. 
+
+Da nicht auf ein vorhandenes Modell zurückgegriffen werden kann, muss das Segelboot für dieses Projekt daher vollständig neu entwickelt werden. 
 
 
-\section{Energie}
-Da das Segelboot seine Position selbständig bestimmen und den Weg ins Ziel finden soll, muss es über ¨ınteligente” Komponenten verfügen, braucht dieses elektrischen Strom um die Komponenten mit Energie zu versorgen. Da das Segelboot vollkommen autonom funktionieren soll, muss diese auf dem Schiff selbst gewonnen werden. In Frage kommen dabei grundsätzlich drei Energiequellen, nämlich Wasserenergie, Windenergie und Sonnenenergie. 
 
-\subsection{Wasserturbine}
-Da sich das Boot im Wasser bewegt, könnte eine kleine Wasserturbine am Bootskörper befestigt und die Strömung zu deren Antrieb genutzt werden. Da sich das Boot relativ zum Wasser bewegt, gelten die gleichen Prinzipien wie bei Generierung elektrischer Energie durch Wasserkraft in Fliessgewässern.
+\section{Gesetzliche Rahmenbedingungen}
 
-Diese Methode hat jedoch gewichtige Nachteile. Segelboote erreichen, abgesehen von speziellen Konstruktionen wie sog. Foilingboote, bei denen der Bootskörper bei Fahrt vollständig aus dem Wasser gehoben wird, nur bescheidene Geschwindigkeiten. Da die Leistung einer Turbine in einer Flüssigkeit bei gleicher Fläche kubisch zur Strömungsgeschwindigkeit ansteigt, erlaubt diese Methode selbst bei idealen Segelbedingungen nur eine geringe Energieausbeute. Zudem wu¨rde das Segelboot durch die Turbine empfindlich abgebremst. 
+Das projektierte autonome Segelboot ist ein Segelschiff im Sinne der Binnenschifffartsverordnung (siehe Kapital 1.2 oben) und fällt damit grundsätzlich unter die einschlägigen gesetzlichen Zulassungs-, Betriebs- und Verkehrsbestimmungen. Da es aber kürzer als 2.5 m ist, ist es von der Kennzeichnungspflicht mit dem behördlich zugeteilten Kennzeichen ausgenommen (Artikel 16 Abs. 2 Buchstabe b der Binnenschifffartsverordnung). Es benötigt damit gemäss Art. 92 der Binnenschiffartsverordnung auch keinen Schiffsausweis, womit auch eine behördliche Zulassungsprüfung entfällt. Das Boot muss aber einen Schiffsnamen tragen, der sich aus Buchstaben und Zahlen zusammensetzen kann, sowie mit dem Namen und der Adresse des Eigentümers versehen sein (Art. 16 Abs. 3 Binnenschifffartsverordnung). Für die Führung des autonomen Segelbootes ist kein Schiffsführerausweis erforderlich, solange die Segelfläche nicht mehr als 15 Quadratmeter beträgt. Das vorgesehen Segel erreicht diese Grösse bei weitem nicht. 
 
-\subsection{Windturbine}
-Auch die Generierung von elektrischer Energie mithilfe einer Windturbine unter Nutzung der Windkraft ist nicht praktikabel. Um die Windenergie in Bewegungsenergie umzusetzen, aus der dann elektrische Energie generiert werden kann, muss ein Windrad in den Wind gedreht werden. Ein Segelboot kann keinen Kurs gegen den Wind segeln. Der Kurs vor dem Wind (also ein Kurs, bei dem der Wind von hinten auf das Boot trifft) ist zwar möglich, aber wenig effizient. Ein Windrad könnte folglich nicht fix mit dem Boot verbunden werden, sondern müsste drehbar ausgelegt werden, damit es unabhängig vom Kurs des Bootes in den Wind gedreht werden kann. Es müsste so platziert werden, dass nicht nur eine Berührung des Segels, sondern auch eine Berührung der Wasseroberfläche bei einer Kränkung (Schieflage) des Bootes ausgeschlossen ist. Damit müsste es am äussersten Bug, am äussersten Heck oder auf dem Mast platziert werden. Alle Positionen verbieten sich, da damit die Balance des Bootes akut gefährdet wäre. 
+Beim Betrieb muss das autonome Segelboot 
 
-Schliesslich würde eine Positionierung am Bug oder Heck, je nach vorherrschendem Wind, zu einer vollen oder teilweisen Abschattung des Windrades durch das Segel oder des Segels durch das Windrad führen. Eine Positionierung auf dem Mast würde selbst im Fall eines Vertikalwindrades zu Verwirbelungen führen, welche die Segeleigenschaften des Bootes negativ beeinträchtigen würden. 
+\href{https://www.fedlex.admin.ch/eli/cc/1979/337_337_337/de\#art_42}{\textbf{Art. 42}}\textsuperscript{\href{https://www.fedlex.admin.ch/eli/cc/1979/337_337_337/de\#fn-d6e2948}{103}}\href{https://www.fedlex.admin.ch/eli/cc/1979/337_337_337/de\#art_42}{ Besondere Regeln}Schiffe, die kürzer sind als 2,50 m (Art. 16 Abs. 2 Bst. b), Strandboote und dergleichen (Art. 16 Abs. 2 Bst. c) dürfen nur in der inneren Uferzone (150 m) oder im Abstand von höchstens 150 m um sie begleitende Schiffe herum verkehren.
 
-Einfluss auf den Kurs, da das Boot nicht verankert ist. Damit geht Energie verloren, da das Boot „weggeschoben“ wird, statt die Windenergie in nutzbare Drehung umzutzen.
+Licht Art. 25 Abs. 2 
+\textsuperscript{2} Segelschiffe, die nur unter Segel fahren, führen bei Nacht und bei unsichtigem Wetter:
 
-\subsection{Photovoltaik}
-Für die Nutzung der Sonnenenergie kommt nur die Methode der Photovoltaik in Frage. Die für den Betrieb von Wärme-Kraft-Maschinen erforderlichen Temperaturen lassen sich auf einem beweglichen Boot mit Sonnenenergie nicht erreichen.
+a. getrennte Seitenlichter und ein Hecklicht; b. ein Kombinations-Seitenlicht und ein Hecklicht; c ein Dreifarben-Topplicht; oderd. ein weisses Rundumlicht. 
 
-Die Energieerzeugung mittels Photovoltaikanlagen ist auf Segelbooten bliebt und verbreitet. Solche Anlagen haben keinen Einfluss auf die Segeleigenschaften des Bootes. Die Energieausbeute hängt aber stark vom Sonnenstand und dem vorherrschenden Wetter ab. Im Gegensatz zu stationären Anlagen lassen sich Photovoltaikanlagen auf Booten nicht ideal auf die Sonne ausrichten und können je nach Kurs sogar vom Segel beschattet werden. Da während der Nachstunden überhaupt keine Energie gewonnen werden kann, muss das Boot zur Überbrückung zwingend mit einem Energiespeicher ausgerüstet werden.
 
-\subsection{Enegiespeicher}
-Da das Segelboot vollkommen autonom funktionieren soll, muss die Ener- gieversorgung von Anfang an beachtet werden. Daher wurde ein Konzept entwickelt um das Segelboot mit Solarenergie zu versorgen. Dies beinhaltet einen Akku welcher u¨ ber genu¨ gend Kapazita¨t verfu¨ gen muss.
+\href{https://www.fedlex.admin.ch/eli/cc/1976/725_724_724/de\#art_16}{\textbf{Art. 16}  Gesetz 
+Schiffsführung}\textsuperscript{1} Jedes Schiff muss einen verantwortlichen Führer haben.
 
-Da sich sehr schnell herausstellt, dass im Handel verfu¨ gbare Powerbanks fu¨ r diese Anwendung unbrauchbar sind. Dies liegt daran, dass kaum eine Powerbank ”pass trough loadingu¨ nterstu¨ tzt. Diese Technonologie kennt man in der Regel nur von einem UPS (Uninteruppted Power Supply). Ein solches ist jedoch in der Gro¨ ssenskala sehr schwer zu erwerben. (Nein , diese sollen einen Netzausfall abfedern
-
-Diskussion der verschieden Typen (Bleiakku, LiPo etc
+\textsuperscript{2} Schiffsführer ist, wer die tatsächliche Befehlsgewalt innehat.
 
  
 
-\section{Windrichtungssensor}
+Schalleneichengabe. Ab dem begleitenden Boot. Art. 33 gemäss den an dieses gestetllten Anforderungen.
 
-
+ Das autonome Segelboot darf auf Schweizer Gewässern nicht ohne "Aufsicht" autonom operieren dürfen. 
 
 
 
