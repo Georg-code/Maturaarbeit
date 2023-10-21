@@ -84,13 +84,22 @@ Das Ziel und die Wegpunkte werden mit Geojson festgelegt. So können diese in di
 
 Da das Boot nur auf kleinen Gewässern verkehrt, wird die Krümmung der Erde nicht einberechnet.
 
+\section{Kollisionsvermeidung}
+Damit das Segelboot nicht auf Grund läuft, muss es eine Form der Kollisionsvermeidung geben. Diese funktioniert jedoch nur mit vorher einprogrammieren Hindernissen, wie das Ufer, Inseln oder Naturschutzgebiete. 
+Funktionieren tut dies mit dem selben Prinzip wie dem Aufkreuzen (gegen den Wind fahren). Bei jeder Iteration wird die Distanz zu den Hindernissen berechnet. Falls diese weniger weit als 40m beträgt, Regristriert das Boot diese als Gefahr und weicht ihnen aus.  
+
+Hindernisse werden immer als Punkt behandelt. Sobald Hindernisse in der unmittelbaren nähe (40m) des Bootes sind, funktioniert die Berechnung etwas anders.
+
+Als erstes werden die Vektoren zwischen den Hindernissen und dem Boot in einer Liste gespeichert. Beim Berechnen der neuen Richtung wird nun nicht mehr nur das Skalarprodukt zwischen dem Wind und dem Boot in betracht gezogen, sondern ebenfalls das Skalarprodukt zwischen den einzelnen Hindernissen und dem Boot. So wird dann versucht eine neue Richtung zu finden.
+
+Nachteile in diesem reaktiven Ansatz sind offensichtlich. Das Boot könnte in Buchten geraten, aus welchen es nicht mehr herausfindet. Dies lässt sich aber vermeiden, in dem man das Boot schon erst gar nicht in solche Buchten reinlässt. 
+
 \section{Motorsteuerung}
 Wie im Kapitel Elektronik bereits erwähnt, werden zwei Aktuatoren verwendet. Beide lassens ich nur einen 5V plus zwischen 1ms und 2ms auf eine gewünschte Position setzen. 
 
-\subsection{Ruder}
-Für das Ruder wird ein PD (Proportional Derivative) Controller verwendet. Auf den Integralen bestandteil kann verzichtet werden, da es sich bei diesen Bewegungen um keine schnellen Bewegungen handelt. 
-Um das Ruder auf die gewünsche Position zu stellen, wird als erstes der "Fehler" bzw. der Unterschied zwischen der Aktuellen Ausrichtung und der Gewünschten Ausrichtung berechnet. 
-%%% PD controller weiter erklären
+\subsection{Ruder (PD Controller)}
+Für das Ruder des Segelboots ist ein Regelungssystem notwendig, welches das Boot in die richtige Richtung bringt. Hierfür wird ein PD controller verwendet. Der Name "PD" steht für Proportional (P) und Derivative (D). Diese Begriffe beschreiben die Hauptkomponenten des Regelungsalgorithmus. Der proportionale Teil des Reglers misst den Fehler zwischen der aktuellen Ausrichtung (des Bootes) und der gewünschten Ausrichtung. Dieser Fehler wird als Vektor dargestellt. Der P-Anteil multipliziert diesen Fehler mit dem Verstärkungsfaktor (Kp), um einen ersten Korrekturwert zu generieren. Demnach gilt, je grösser der Fehler ist, desto grösser muss die Korrektur sein. Mit diesem Teil des Reglers wird das Ruder erstmals in die richtige Richtung gelenkt. Der Derivativteil (D) des Reglers achtet darauf, wie sich die Änderung des Fehlers verhält. Wenn das Boot sich dem gewünschten Kurs nähert, kann der Fehler, schnell abnehmen, was zu einem Überschwingen führen könnte. Der D-Teil versucht, dieses Überschwingen mölglichst zu reduzieren, indem er den Fehlergeschwindigkeitsvektor (sprich die Ableitung des Fehlers) berechnet. Dieser wird ebenfalls mit einem Verstärkungsfaktor multipliziert. Aus der Kombination von P- und D-Komponenten kann eine Ruderposition, die zwischen 0 und 1 liegt, berechnet werden. Ein Wert von 0.5 entspricht dem Ruder, welches sich, wenn alles stimmt in der Mitte befinden sollte. Somit kann sich das Boot sanft an den gewünschten Kurs annähern, ohne dauernd zu Übersteuern. 
+
 
 \subsection{Segel}
 Da das Segel nicht über besonders viele Trimmmöglichkeiten verfügt und die Schnelligkeit wie anfangs erwähnt kein bedeutender Faktor für diese Arbeit ist, wird das Flap immer in die Richtung des Windes gedreht. Dies sorgt dafür, dass das Segel in eine Segelbare Position gebracht wird 
@@ -102,8 +111,7 @@ Da das Segel nicht über besonders viele Trimmmöglichkeiten verfügt und die Sc
     \label{fig:enter-label}
 \end{figure}
 
- 
-%%% Bereitstellung der Daten mittels GEOJSON
+
 
 
 

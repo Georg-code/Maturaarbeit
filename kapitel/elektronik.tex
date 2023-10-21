@@ -4,12 +4,11 @@
 \label{chap:elektronik}
 
 \section{Das Gehirn des Bootes}
-Für die Steuerung des Bootes wird ein Raspberry Pi Zero W 1.1 verwendet. Dieser verfügt über ausreichend Rechenenleistung um alle notwendigen Berechnungen in Echtzeit durchzuführen und ist nur 6,5 mal 3 cm gross.
+Für die Steuerung des Bootes wird ein Raspberry Pi Zero W 1.1 verwendet. Dieser verfügt über ausreichend Rechenenleistung um alle notwendigen Berechnungen in Echtzeit durchzuführen. Er verfügt über einen einkernigen ARM Prozessor, der mit 400 MHz getacktet ist. Sein Arbeitsspeicher beträgt 512 Megabyte. Er ist nur 6,5 mal 3,2 cm gross und wiegt nur 9 Gramm.
 
-Auf dem Rasperry Pi läuft ein Debian basiertes GNU/Linux Betriebssystem. Im Kapitel Autonomie wird auf die Software detailliert eingeangen. 
+Auf dem Rasperry Pi läuft ein Debian basiertes GNU/Linux Betriebssystem. Im Kapitel Autonomie wird auf die Software detailliert eingegangen. 
 
-Der Raspberry Pi Zero W 1.1 kann sowohl über als auch über WLan nach den Spezfikationen 802.11 b/g/n sowie über Bluetooth 4.1 und Bluetooth Low Energy (BLE) kommunizieren.  
-
+Der Raspberry Pi Zero W 1.1 kann über WLan nach den Spezfikationen 802.11 b/g/n sowie über Bluetooth 4.1 und Bluetooth Low Energy (BLE) kommunizieren. Die  Wlan Verbindung wird benutzt, um mit dem autonomen Segelboot zu kommunizieren. Über die Verbindung kann der Rechner drahtlos aufgesetzt und eingerichtet werden. Auch die Übermittlung von Zielkoordinaten erfolgt über diese Verbindung. Die Bluetooth Verbindung wird nicht benutzt.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{assets/raspi Zero.jpg}
@@ -19,10 +18,10 @@ Der Raspberry Pi Zero W 1.1 kann sowohl über als auch über WLan nach den Spezf
 
 
 
+Die in den unmittelbar nachfolgenden Abschnitten beschriebenen Sensoren und Aktuatoren sowie die Energieversorgung werden über die 40 GPIO (general-purpose input/output) Pins angeschlossen. 
 
-
-
-
+Der Raspberry Pi Zero W 1.1 wird mit 5 V Gleichspannung betrieben. Sein Stromverbrauch ist sehr bescheiden. Seine maximale Spromaufnahme liegt bei 1,2 A [https://de.wikipedia.org/wiki/Raspberry_Pi#Eigenschaften]; im Leerlauf braucht er aber nur 120 mA.
+[https://www.bitblokes.de/stromverbrauch-des-raspberry-pi-zero-w-mit-wlan-und-bluetooth-gemessen/ ]
 \section{Sensoren und Aktuatoren}
 \subsection{Positionsestimmung (GPS)}
 
@@ -42,8 +41,7 @@ Das Modul wird über die eben falls vorhandenen Pins mit dem Raspberry Pi Zero W
     \caption{GPS Modul - Oberseite}
     \label{fig:enter-label}
 \end{figure}
-Das Modul wird unter Deck im Rumpf des Bootes platziert. Weil für die Deckplatte eine dünne Sperrholzplatte verwendet wird kann auf eine externen Empfangsantenne verzichtet werden. Die vorhandene SMA Antennen Steckbuchse bleibt damit unbenutzt und es wird die eingebaute keramische Patchantenne verwendet. In der untenstehenden Abbildung \href{}{}
-
+Das Modul wird unter Deck im Rumpf des Bootes platziert. Weil für die Deckplatte eine dünne Sperrholzplatte verwendet wird kann auf eine externen Empfangsantenne verzichtet werden. Die vorhandene SMA Antennen Steckbuchse bleibt damit unbenutzt. Es wird die eingebaute keramische Patchantenne verwendet. In der unmittelbar untenstehenden Abbildung ist diese als rosa Fläche mit einbem metallenen Knopf auf einem beigen Körper sichtbar. Solche Antennen 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{vma430_back-1.jpg}
@@ -51,10 +49,11 @@ Das Modul wird unter Deck im Rumpf des Bootes platziert. Weil für die Deckplatt
     \label{fig:enter-label}
 \end{figure}
 
-
 \subsection{Gyro und Magnetometer}
 
-Ein Magnetormeter wird als Kompass verwendet. Hierfür wird das Sensormodul GY-273 QMC5883L. Dieses Misst das Dreisimensionale Magnetische Feld aus welchem sich dann die Bootsrichtug ableiten lässt. Das Modul hat hat zudem ebenfalls einen Integrietes Gyroskop, somit ist ebenfalls möglich die Bewegung des Schiffes nachzuvollziehen und Schräglagen nachzuvollziehen. 
+Zur Bestimmung der Richtung des Segelboots dient ein Magnetormeter. Ein Magnetometer ist eine sensorische Einrichtung zur Messung magnetischer Flussdichten [https://de.wikipedia.org/wiki/Magnetometer]. Im voriegenden Projekt wird das Magnetormeter dafür eingesetzt, um damit einen Magnetkompass zu realisieren, indem das erdmagnetische Feld dreidimensional erfasst wird, um daraus die Bootsrichtung abzuleiten. Dieses Verfahren wird auch in Smartphones zur Richtungsbestimmung angewendet.  
+
+Im vorliegenden Projekt wird dafür das Sensormodul Purecrea GY-273 QMC5883L der deutschen Purecrea GmbH vorgesehen. Das Modul ist zusätzlich mit einem Gyroskop (deusch: Kreiselinstrument) ausgestattet. Auch damit kann die Bewegung des Segelboots erfasst werden. Ausserdem erlaubt es die Bestimmung der   Schräglage des Segelbootes. Im vorliegenden Projekt wird dieser Wert aber nicht erfasst und ausgewertet.
 
 \begin{figure}[H]
     \centering
@@ -62,29 +61,81 @@ Ein Magnetormeter wird als Kompass verwendet. Hierfür wird das Sensormodul GY-2
     \caption{Gyro und Magnetometer}
 \end{figure}
 
+Das Sensormodul wird mit einer Eingangsspannung von 3-5 V Gleichspannung betrieben. Sein Pins 1 (GND) wird dafür mit der Ground Leitung und sein Pin 2 (VCC) wird mit der der 5 V Gleichspannungsleitung der
+Stromversorgung verbunden.
 
-\subsection{Eiegenentwicklung des Windrichtungssensor}
-Auf dem Markt gibt es erstaunlich wenige Windrichtungsmesser welche für dieses Projekt anwendbar wären. Manche sind zu gross, manche brauchen Energiemengen welche mir auf einem Boot nicht zur Verfügung stehen und wiederum andere sind schlichtweg zu teuer. Daher wird ein möglichst effizienteren jedoch kostengünstigen Sensor entwicket.
-Populär sind vorallem zwei typen von Windrichtungssensoren, welche eine unterschiedliche Angehensweise haben, die Richtung des Windes digital festzuhalten. \\
-Zum einen wären das Sensoren welche mithilfe eines Pontiometer funktionieren. Diese sind mechanisch sehr leicht umzusetzen, da man lediglich einen kleinen flügel an einem Potentiometer befestigt. Die Position kann in der Regel über einen Analogen Input pin auf einem Microcontroller eingelesen werden.
-\\
-Die zweite Option sind Hall Sensoren, mit welchen man typischerweise Stärke von Magneten misst. Um die Rotation eines Objektes mittels hallsensoren festzustellen gibt es 2 Möglichkeiten. Bei der ersten Variante plaziert man um ein abwechselnd magnetisch positiv und magnetisch positiv geladenes rundes Objekt eine belibige Anzahl an Hall sensoren um somit die Rotation zu messen. Das Problem dieser Methode ist die Vielzahl an benötigten Hallsensoren welche sehr aufwändig zu plazieren wären. Die Zweite und deutlich veilversprechendere Option sind sogenannten Rotary Hall Sensors. Hier wir ein AS5040-ASST Chip auf einen Adapterboard verwendet. Dies ermöglicht es den Windrichtungsmesser einfacher zusammen zu bauen.
+Die Kommunikation mit dem Raspberry Pi Zero W 1.1 erfolgt über eine serielle Verbindung. Der Pin 4 (SCL) und der Pin 5 (SDA) des Moduls werden dafür mit den Pins 5 und 19 des Raspberry Pi Zero W 1.1 verdrahtet.
 
-?? BILD ???
+\subsection{Eigenentwicklung des Windrichtungssensor}
+Der Windrichtungssenor muss selbst entwickelt und gebaut werden, da die am Markt angebotenen  Windrichtungsmesser entweder zu gross und zu schwer sind, Energiemengen benötigen, die auf dem autonomen Segelboot nicht zur Verfügung stehen oder unerschwinglich teuer sind.
 
+Windrichtungssensoren lassen sich in zwei unterschiedliche Typen einteilen. Der erste Typ verwendet ein Pontiometer zur Richtungsbestimmung. Solche Messgeräte sind mechanisch sehr leicht umzusetzen, da dazu lediglich ein kleiner Flügel an der Achse eines Potentiometers befestigt werden muss. Die Position des Flügels kann damit über einen analogen Input Pin mit einem Microcontroller eingelesen und daraus die Richtung des Windes abgeleitete werden. Der Nachteil dieses Typs ist, dass die freie Drehung der Achse durch die Reibung das Potentiometers stark abgebremnst wird. Dieser Typ wird daher nicht weiter verfolgt.
+
+Der andere Type verwendet Hall Sensoren, welche den Hall-Effekt zur Messung von 
+Magnetfeldern nutzen [https://de.wikipedia.org/wiki/Hall-Sensor]. Sie sind passive Sensoren, die den Spannungsunterschied messen, der an einem elektrischen Leiter erzeugt wird, wenn ein Magnetfeld senkrecht zur Fliessrichtung eines elektrischen Stroms steht [https://at.rs-online.com/web/content/discovery-portal/produktratgeber/hall-sensoren-leitfaden]. Um die Rotation eines Objektes mittels Hall Sensoren zu messen gibt es die folgenden zwei Möglichkeiten. 
+
+Bei der ersten Variante wird um ein abwechselnd magnetisch positiv und magnetisch negativ geladenes rundes Objekt mehrere Hall Sensoren platziert. Damit kann dann die Drehung des Objektes gemessen werden. Diese Variante ist praktisch schwierig umzusetzen, weil viele Hall Sensoren präzis kreisförmig um eine Achse angeordnet werden müssen. Dafür müssten die Hall Sensoren in enger Folge auf einer individuell entworfenen Platine verlötet werden. Der Entwurf einer solchen Platine ist anspruchsvoll, mit deren Herstellung müssten Auftragsfertiger beauftragt werden, was hohe Kosten verursachen würde. Weil die Hall Sensoren sehr eng aneinander platziert werden müssten, müssten sogeannte SMD Varianten (Surface Mountable Device; deutsch: oberflächenmontierbare Bauteile) verwendet werden, die ohne Bohrungen direkt auf die Oberfläche der  Platine gelötet werden. Es braucht dafür eine spezielle Löttechnik und die Gefahr, dass Bauteile beim Lötvorgang den Hitzetod sterben ist erheblich, wenn der Lötende über wenig Übung verfügt. Diese Varianten wird daher nicht weiter verfolgt.
+
+Die zweite Varianten ist praktisch einfacher umzusetzen. Statt normale Hall Sensoren werden dabei spezielle, sogenannten Rotary Hall (deutsch rotierende magnetische Hall) Encoder verwendet. Ein Encoder (oder Messwertgeber) dient in der Antriebstechnik zur Signalbildung aus mechanischen Bewegungen. Er erkennt die Position einer Antriebseinheit (Welle) und gibt diese als elektrisches Signal aus. [https://www.kc-co.com/de/glossar/encoder/]. Rotary Hall Encoder sind komplexe Bauteile die fast immer als System-on-Chip gefertigt, in dem integrierte Hall-Elemente, analoges Frontend  und digitale Signalverarbeitung in einem einzigen Gerät integriert sind. Zur Messung des Winkels wird nur ein einfacher zweipoliger Magnet benötigt, der sich der sich über oder unter der Mitte des Chips dreht.
+Zur Funktiosweise von Rotary Hall Encodern: Josef Janisch, Understanding Integrated Hall Effect Rotary Encoders, Nov 1, 2006 1:00am, auf Fierce Electonics (www.fierceelectronics.com/components/understanding-integrated-hall-effect-rotary-encoders). 
+
+Da der Für das vorliegende Projekt wird ein Windsensor auf der Basis eines Rotary Hall Encoders vorgezogen. Dabei wird der auf einem Adapterboad gelötete AS5040-ASST der österreichischen ams-OSRAM AG verwendet. Das ist ein berührungsloser Rotary Hall Encoder für genaue Winkelmessung über eine volle Umdrehung von 360°.  Die absolute Winkelmessung liefert eine sofortige Anzeige der die Winkelposition des Magneten mit einer Auflösung von 0,35° = 1024 Positionen pro Umdrehung. Diese digitalen Daten sind als serieller Bitstrom und als PWM (Pulsweitenmodulation) Signal zur Verfügung. Für das vorliegende 
+Darüber Projekt wird der serielle Bitstrom genutzt. 
+
+Der Encoder kann mit 3,3V oder 5V betrieben werden. Quellen für beide Spannungen sind auf dem Segelboot vorhanden. Es wird der 3.3V Anschluss an Pin (.::::::::::::::::::::::......) des Raspberry Pi Zero W 1.1 genutzt.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/as5040image.png}
+    \caption{AS5040-ASST mit Adapter Board}
+    \label{fig:as5040}
+\end{figure}
+
+Verkablung
+
+Bau de Windmessers aus gedruckten Teilen. 
+Das Gehäuse des Windmesser besteht aus vier 3D gedruckten Teilen. Der obere Teil, der sich mit dem Wind dreht, ist so gebaut, dass er sich dank einem fahnenählichen Teil mit dem Wind dreht. Ebenso wird darauf geachtet, dass der Massemittelpunkt genau auf dem Drehpunkt liegt, damit die Messwerte auch dann genau sind, wenn das Boot nicht gerade ist. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{assets/windsensor_top.png}
+    \caption{Windsensor Top}
+    
+\end{figure}
+
+Ebenso wurde ein Gehäuse für den Sensor gedruckt, bei welchem der Encoder und der Magnet immer richtig Ausgerichtet sind.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{assets/image.png}
+    \caption{Bodenplatte um das Adapterplätchen richtig zu positionierten}
+    
+\end{figure}
 
 \subsection{Aktuatoren}
-Für die Bewegung des Ruders und des Sailflaps werden L16-100-63-6-R Aktuatoren von Actuonix verwendet. Diese sind für den Robotik ausgelegt und wasserdicht, was sie für diese Anwendung perfekt macht. Mit 6V (und 5V) können sie betrieben werden und haben eine 63:1 Übersetzung. Dies macht sie nicht besonders schnell, aber sie verfügen über die notwendige Kraft.
-Sie verfügen über kein digitales Positionsfedback, dass heisst, dass nicht abgefragt werden kann, an welcher Position sich der "Stab" gerade befindet. Es können jedoch konkrete Distanzen angesteuert werden. Verbunden wird der Aktuator mit dem Pluspol und einer über das System geteiltem Ground. Über eine einzige Datenverbindung können kurze Impulse zwischen 1ms-2ms gesendet werden, wobei 1ms den Aktuator in die Startposition führt und der Aktuator bei 2ms voll ausgefahren wird. Um Einstellungen dazwischen zu erhalten, wird ein Wert zwischen 1ms und 2ms gesendet.  
+Für die Bewegung des Ruders und des Sailflaps werden Aktuatorn verwendet. Aktuatoren (auch als Aktoren bezeichnet) sind das signalwandlerbezogene Gegenstück zu Sensoren. Sie setzen bei einem Bewegungsregelungsvorgang Signale durch mechanische Arbeit in Wirkungen um [https://de.wikipedia.org/wiki/Aktor]. Zur Bewegung von Ruder und Sailsflaps werden elektrische lineare Aktuatoren benötigt. Ein elektrischer Linearantrieb ist ein Gerät, das die Drehbewegung eines Wechsel- oder Gleichstrommotors in eine lineare Bewegung umwandelt. Er kann sowohl Schub- als auch Zugbewegungen ausführen.
 
+Für das vorliegende Projekt werden zwei L16-100-63-6 Serie R Aktuator der kanadischen Actuonix Motion Devices Inc. verwendet. Diese sind für den Einsatz in der Robotik und im Modellbau entwickelt worden und wasserdicht. Damit sind  sie für den Einsatz  auf Segelbooten prädestiniert. 
 
-?? HAST DU WATT ANGABEN???
+Die Aktuatorachese kann um maximal 100mm ausgefahren werden. Die Maximalgeschindigkeit liegt ohne Last bei 20 mm/s. Damit sind sie nicht besonders schnell, verfügen mit 100N Stoss- und 46N Zugkraft aber über ausreichen Kraft zur Bewegung von Ruder und Sailflaps. Ihr Peak Power Point (der spezifische Geschwindigkeits- und Kraftpunkt, an dem die grösste Leistungsabgabe erfolgt), liegt bei 75N bei 10 mm/s. Das Getriebe der Akltuatoren weist eine Übersetzung von 63:1 auf. 
+
+Die Aktuatoren verfügen über kein digitales Positionsfedback, dass heisst, dass nicht abgefragt werden kann, an welcher Position sich das Ende der ausfahrbahren Achse befindet. Es können jedoch konkrete Distanzen angesteuert werden. 
+
+Die Aktuatoren weisen einen Normeingangsspannung von 6V auf, können aber auch mit der vorhandenen 5V Quelle betrieben werden, was aber zu einer leicht reduzierten Geschwindigkeit und Kraft führt. Für den Einsatz werden die Aktuatoren mit der  5 V Gleichspannungsleitung und der Ground Leitung der Enegerieversorung   verbunden. 
+
+Über eine einzige Datenleitung  können kurze Impulse zwischen 1ms-2ms gesendet werden, wobei 1ms den Aktuator in die Startposition führt und der Aktuator bei 2ms voll ausgefahren wird. Um Einstellungen dazwischen zu erhalten, wird ein Wert zwischen 1ms und 2ms gesendet. 
+
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.5\linewidth]{actuonix.png}
     \caption{Actuonix Aktuator}
     \label{fig:actuator}
 \end{figure}
+
+\section{Schleifring (Slip Ring}
+
+
+Text fehlt
+
 
 \section{Energieversorgung}
 
@@ -137,7 +188,7 @@ Deutlich grössere Powerstations, die insbesondere für den Campingeinsatz vorge
 Es muss daher auf eine Eigenentwicklung zurückgegriffen werden. Gängig dafür sind 18650 Li-ion Zellen. Die verwendeten Zellen verfügen über eine Akku Kapazität von 2'500 mAh bei 3.7 V. 
 Der Akku wird in zwei Teile unterteilet, welche untereinander Parallel Geschalten sind. So bleibt die Spannung die selbe, jedoch erhöt sich die Kapazität. Die beiden Teile werden dann Seriel miteinander Vebunden. Somit ergibt sich eine Spannung von 7.4V und 25000mAh. 
 
-Die einzelnen Zellen werden untereinander mit einem Nickelband verbunden, welches mit einem Punktschweissgerät direkt auf den Zellen verankert ist. Spezialwekzeug musste gekauft weren
+Die einzelnen Zellen werden untereinander mit einem Nickelband verbunden, welches mit einem Punktschweissgerät direkt auf den Zellen verankert ist. Hierfür muss Spezialwerkzeug erworben werden, da ein solches Punktscheissgerät nicht zur Standartausrüstung einer Werkstatt gehört. Hier wird von den definierten Anforderungen abgewichen, da ein verlöten der Zellen technisch durchaus möglich wären, langes erhitzen durch den Lötkolben, könnten diese jedoch Permanent beschädigen und zu Feuer führen. Aus Sicherheitsgründen wird daher hier abgewichen. 
 
 
 
