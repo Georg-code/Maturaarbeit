@@ -82,6 +82,8 @@ Nun wird wieder mithilfe des Skalarprodukts überprüft, welcher der beiden Kurs
 Die Wegpunkte werden Mittels GeoJson bereitgestellt. GeoJson ist grundsätzlich reines Json. Es steht für JavaScript Object Notation und ermöglicht es Objekte von verschienedenen Programiersprachen in einem einheitlichen Format zu speichern. GeoJson ist ein weit verbreitetes Format für Geodaten, da so die Daten standardisiert gespeichert und gelesen werden können.
 Das Ziel und die Wegpunkte werden mit Geojson festgelegt. So können diese in diversen Kartenprogrammen einfach bearbeitet werden.
 
+Da das Boot nur auf kleinen Gewässern verkehrt, wird die Krümmung der Erde nicht einberechnet.
+
 \section{Motorsteuerung}
 Wie im Kapitel Elektronik bereits erwähnt, werden zwei Aktuatoren verwendet. Beide lassens ich nur einen 5V plus zwischen 1ms und 2ms auf eine gewünschte Position setzen. 
 
@@ -93,7 +95,12 @@ Um das Ruder auf die gewünsche Position zu stellen, wird als erstes der "Fehler
 \subsection{Segel}
 Da das Segel nicht über besonders viele Trimmmöglichkeiten verfügt und die Schnelligkeit wie anfangs erwähnt kein bedeutender Faktor für diese Arbeit ist, wird das Flap immer in die Richtung des Windes gedreht. Dies sorgt dafür, dass das Segel in eine Segelbare Position gebracht wird 
 
-%%%% VISUALISIERUNG 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{sailflap_erklärung.png}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
 
  
 %%% Bereitstellung der Daten mittels GEOJSON

@@ -4,9 +4,13 @@
 \label{chap:elektronik}
 
 \section{Das Gehirn des Bootes}
-Für die Steuerung des Bootes wird ein Raspberry Pi Zero W 1.1 verwendet. Dieser verfügt über ausreichend Leistung um alle notwendigen Berechnungen in Echtzeit durchzuführen. Auf dem Rasperry Pi läuft ein Debian basiertes GNU/Linux Betriebssystem. Im Kapitel Autonomie wird auf die Software jedoch genauer Eingeangen.
+Für die Steuerung des Bootes wird ein Raspberry Pi Zero W 1.1 verwendet. Dieser verfügt über ausreichend Rechenenleistung um alle notwendigen Berechnungen in Echtzeit durchzuführen und ist nur 6,5 mal 3 cm gross.
 
-\begin{figure}
+Auf dem Rasperry Pi läuft ein Debian basiertes GNU/Linux Betriebssystem. Im Kapitel Autonomie wird auf die Software detailliert eingeangen. 
+
+Der Raspberry Pi Zero W 1.1 kann sowohl über als auch über WLan nach den Spezfikationen 802.11 b/g/n sowie über Bluetooth 4.1 und Bluetooth Low Energy (BLE) kommunizieren.  
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{assets/raspi Zero.jpg}
     \caption{Raspberry Pi Zero W}
@@ -16,25 +20,59 @@ Für die Steuerung des Bootes wird ein Raspberry Pi Zero W 1.1 verwendet. Dieser
 
 
 
+
+
+
 \section{Sensoren und Aktuatoren}
-\subsection{GPS}
-Zur Bestimmung des aktuellen Standorts wird das Modul Neo 7M von Whadda verwendet. Dieses ist über eine Serielle Verbindung (RX und TX pins) verbunden.
+\subsection{Positionsestimmung (GPS)}
+
+Zur Positionsbestimmung also der Bestimmung des aktuellen Standorts des Segelboots, werden Funksignale des bekannten US-amerikanischen satellitenbasierten Global Positioning Systems (GPS) (deutsch Globales Positionsbestimmungssystem), offiziell NAVSTAR GPS verwendet. Dafür wird das Empfängermodul Whadda Neo 7M der belgischen Velleman Group nv verwendet, welches alternativ Signale des entsprechendenen russischen Systems GLONASS empfangen kann. 
 \begin{figure}[H] 
     \centering
-    \includegraphics[width=0.5\linewidth]{gps.png}
+    \includegraphics[width=1\linewidth]{gps.png}
     \caption{GPS Modul}
     \label{fig:gps}
 \end{figure}
+Das Modul verfügt über eine MicroUSB Schnittstelle. Diese wird aber nicht verwendet, weil der Raspberry Pi Zero W 1.1 nur über zwei MicroUSB verfügt, Kabel mit zwei männlichen MicroUSB Steckern aber nicht existieren und in den USB Spezifikationen nicht vorgesehen sind. 
+
+Das Modul wird über die eben falls vorhandenen Pins mit dem Raspberry Pi Zero W 1.1 verdrahtet und  kommuniziert über eine serielle Verbindung. Die Pins 2 (TX) und 3 (RX) werden dabei mit den Pins 10 und 8 des Raspberry Pi Zero W 1.1 verbunden. Das Modul wird mit 5 V betrieben. Dazu wird sein Pins 5 (VCC) mit der 5 V Gleichspannungsleitung und sein Pin 4 (GND) mit der Ground Leitung der Stromversorgung verbunden.   
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{vma430_front-1.jpg}
+    \caption{GPS Modul - Oberseite}
+    \label{fig:enter-label}
+\end{figure}
+Das Modul wird unter Deck im Rumpf des Bootes platziert. Weil für die Deckplatte eine dünne Sperrholzplatte verwendet wird kann auf eine externen Empfangsantenne verzichtet werden. Die vorhandene SMA Antennen Steckbuchse bleibt damit unbenutzt und es wird die eingebaute keramische Patchantenne verwendet. In der untenstehenden Abbildung \href{}{}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{vma430_back-1.jpg}
+    \caption{GPS Modul - Unterseite}
+    \label{fig:enter-label}
+\end{figure}
+
 
 \subsection{Gyro und Magnetometer}
+
 Ein Magnetormeter wird als Kompass verwendet. Hierfür wird das Sensormodul GY-273 QMC5883L. Dieses Misst das Dreisimensionale Magnetische Feld aus welchem sich dann die Bootsrichtug ableiten lässt. Das Modul hat hat zudem ebenfalls einen Integrietes Gyroskop, somit ist ebenfalls möglich die Bewegung des Schiffes nachzuvollziehen und Schräglagen nachzuvollziehen. 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.25\linewidth]{assets/magnetometer.jpg}
+    \includegraphics[width=0.5\linewidth]{assets/magnetometer.jpg}
     \caption{Gyro und Magnetometer}
-
 \end{figure}
+
+
+\subsection{Eiegenentwicklung des Windrichtungssensor}
+Auf dem Markt gibt es erstaunlich wenige Windrichtungsmesser welche für dieses Projekt anwendbar wären. Manche sind zu gross, manche brauchen Energiemengen welche mir auf einem Boot nicht zur Verfügung stehen und wiederum andere sind schlichtweg zu teuer. Daher wird ein möglichst effizienteren jedoch kostengünstigen Sensor entwicket.
+Populär sind vorallem zwei typen von Windrichtungssensoren, welche eine unterschiedliche Angehensweise haben, die Richtung des Windes digital festzuhalten. \\
+Zum einen wären das Sensoren welche mithilfe eines Pontiometer funktionieren. Diese sind mechanisch sehr leicht umzusetzen, da man lediglich einen kleinen flügel an einem Potentiometer befestigt. Die Position kann in der Regel über einen Analogen Input pin auf einem Microcontroller eingelesen werden.
+\\
+Die zweite Option sind Hall Sensoren, mit welchen man typischerweise Stärke von Magneten misst. Um die Rotation eines Objektes mittels hallsensoren festzustellen gibt es 2 Möglichkeiten. Bei der ersten Variante plaziert man um ein abwechselnd magnetisch positiv und magnetisch positiv geladenes rundes Objekt eine belibige Anzahl an Hall sensoren um somit die Rotation zu messen. Das Problem dieser Methode ist die Vielzahl an benötigten Hallsensoren welche sehr aufwändig zu plazieren wären. Die Zweite und deutlich veilversprechendere Option sind sogenannten Rotary Hall Sensors. Hier wir ein AS5040-ASST Chip auf einen Adapterboard verwendet. Dies ermöglicht es den Windrichtungsmesser einfacher zusammen zu bauen.
+
+?? BILD ???
+
+
 \subsection{Aktuatoren}
 Für die Bewegung des Ruders und des Sailflaps werden L16-100-63-6-R Aktuatoren von Actuonix verwendet. Diese sind für den Robotik ausgelegt und wasserdicht, was sie für diese Anwendung perfekt macht. Mit 6V (und 5V) können sie betrieben werden und haben eine 63:1 Übersetzung. Dies macht sie nicht besonders schnell, aber sie verfügen über die notwendige Kraft.
 Sie verfügen über kein digitales Positionsfedback, dass heisst, dass nicht abgefragt werden kann, an welcher Position sich der "Stab" gerade befindet. Es können jedoch konkrete Distanzen angesteuert werden. Verbunden wird der Aktuator mit dem Pluspol und einer über das System geteiltem Ground. Über eine einzige Datenverbindung können kurze Impulse zwischen 1ms-2ms gesendet werden, wobei 1ms den Aktuator in die Startposition führt und der Aktuator bei 2ms voll ausgefahren wird. Um Einstellungen dazwischen zu erhalten, wird ein Wert zwischen 1ms und 2ms gesendet.  
@@ -47,15 +85,6 @@ Sie verfügen über kein digitales Positionsfedback, dass heisst, dass nicht abg
     \caption{Actuonix Aktuator}
     \label{fig:actuator}
 \end{figure}
-
-
-\subsection{Eiegenentwicklung des Windrichtungssensor}
-Auf dem Markt gibt es erstaunlich wenige Windrichtungsmesser welche für dieses Projekt anwendbar wären. Manche sind zu gross, manche brauchen Energiemengen welche mir auf einem Boot nicht zur Verfügung stehen und wiederum andere sind schlichtweg zu teuer. Daher wird ein möglichst effizienteren jedoch kostengünstigen Sensor entwicket.
-Populär sind vorallem zwei typen von Windrichtungssensoren, welche eine unterschiedliche Angehensweise haben, die Richtung des Windes digital festzuhalten. \\
-Zum einen wären das Sensoren welche mithilfe eines Pontiometer funktionieren. Diese sind mechanisch sehr leicht umzusetzen, da man lediglich einen kleinen flügel an einem Potentiometer befestigt. Die Position kann in der Regel über einen Analogen Input pin auf einem Microcontroller eingelesen werden.
-\\
-Die zweite Option sind Hall Sensoren, mit welchen man typischerweise Stärke von Magneten misst. Um die Rotation eines Objektes mittels hallsensoren festzustellen gibt es 2 Möglichkeiten. Bei der ersten Variante plaziert man um ein abwechselnd magnetisch positiv und magnetisch positiv geladenes rundes Objekt eine belibige Anzahl an Hall sensoren um somit die Rotation zu messen. Das Problem dieser Methode ist die Vielzahl an benötigten Hallsensoren welche sehr aufwändig zu plazieren wären. Die Zweite und deutlich veilversprechendere Option sind sogenannten Rotary Hall Sensors. Hier wir ein AS5040-ASST Chip auf einen Adapterboard verwendet. Dies ermöglicht es den Windrichtungsmesser einfacher zusammen zu bauen.
-
 
 \section{Energieversorgung}
 
@@ -123,5 +152,12 @@ Die einzelnen Zellen werden untereinander mit einem Nickelband verbunden, welche
 
 \subsection{Ladeeletronik und Spannungswandelung}
 
-Da Litiumzellen beim einer überladung oder bei einer Entladung beschädigt oder im schlimmsten Fall in Flammen aufgehen, wird ein \ac{bms} verwendet. 
+Da Litiumzellen beim einer Überladung oder bei einer Entladung beschädigt oder im schlimmsten Fall in Flammen aufgehen, wird ein \ac{bms} (Battery Managment System) verwendet. Diese werden mit dem Plus und Minus Pol Verbunden. Zudem gibt es eine PM Verbindung, nach dem ersten Teil der seriellen Hälfte.
 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.75\linewidth]{assets/bms_circuit_image.png}
+    \caption{BMS Circuit}
+    \label{fig:enter-label}
+\end{figure}
