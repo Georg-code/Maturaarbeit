@@ -1,17 +1,17 @@
 
 \chapter{Einleitung }
 \label{chap:einleitung}
-Segelboote waren vor der Erfindung motorisierter Boote und Schiffe der Schlüssel zur Globalisierung. Dank der Kraft des Windes konnten Menschen schon damals riesige Distanzen überwinden und Güter selbst über Ozeane transportieren. Seit der Erfindung der der Dampfmaschine und der damit ausgelösten industriellen Revolution dienen sie jedoch fast nur noch als Vergnügungs- oder Sportgeräte. Als Folge der rasanten Entwicklung der Technologie des autonomen Fahrens können Segelboote in nicht zeitkritischen Anwendungen einen erneuten Aufschwung erleben.
+Segelboote waren vor der Erfindung motorisierter Boote und Schiffe der Schlüssel zur Globalisierung. Dank der Kraft des Windes konnten Menschen schon damals riesige Distanzen überwinden und Güter selbst über Ozeane transportieren. Seit der Erfindung der Dampfmaschine und der damit ausgelösten industriellen Revolution dienen sie jedoch fast nur noch als Vergnügungs- oder Sportgeräte. Als Folge der rasanten Entwicklung der Technologie des autonomen Fahrens können Segelboote in nicht zeitkritischen Anwendungen einen erneuten Aufschwung erleben.
 
 
 \section{Heutige Verbreitung von autonomen Segelbooten}
-Während Berichte über Entwicklungen und Fortschritte autonomer Strassenfahrzeuge fast täglich in der Presse erscheinen und sich die bedeutendsten und kapitalkräftigsten Unternehmen der Fahrzeugindustrie und Informatik in einem harten Wettbewerb um die Führerschaft bei deren Entwicklung befinden (siehe https://de.wikipedia.org/wiki/Autonomes\_Fahren), fristet die Entwicklung von autonome Segelbooten bisher ein Schattendasein. 
+Während Berichte über Entwicklungen und Fortschritte autonomer Strassenfahrzeuge fast täglich in der Presse erscheinen und sich die bedeutendsten und kapitalkräftigsten Unternehmen der Fahrzeugindustrie und Informatik in einem harten Wettbewerb um die Führerschaft bei deren Entwicklung befinden \cite{noauthor_autonomes_2023}, fristet die Entwicklung von autonome Segelbooten bisher ein Schattendasein. 
 
 \section{Was sind autonome Segelboote}
 \subsection{Segelboot}
-Ein Schiff ist in Wasserfahrzeug oder ein anderer zur Fortbewegung auf oder unter der Wasseroberfläche bestimmter Schwimmkörper, oder ein schwimmendes Gerät (Artikel 2 Abs. 1 lit. a Ziffer 1 der Verordnung über die Schifffahrt auf schweizerischen Gewässern (Binnenschifffahrtsverordnung, BSV) vom 8. November 1978. Ein Boot ist damit ein Schiff, wobei der Begriff Schiff als Überbegriff für Wasserfahrzeuge gilt und der Begriff Boot regelmässig zur Bezeichnung kleineren Wasserfahzeuge wie Ruderboote, Sportboote, Paddelboote etc. dient, die in der Regel nicht eingedeckt sind (https://de.wikipedia.org/wiki/Boot). 
+Ein Schiff ist in Wasserfahrzeug oder ein anderer zur Fortbewegung auf oder unter der Wasseroberfläche bestimmter Schwimmkörper, oder ein schwimmendes Gerät (Artikel 2 Abs. 1 lit. a Ziffer 1 der Verordnung über die Schifffahrt auf schweizerischen Gewässern (Binnenschifffahrtsverordnung, BSV) vom 8. November 1978. Ein Boot ist damit ein Schiff, wobei der Begriff Schiff als Überbegriff für Wasserfahrzeuge gilt und der Begriff Boot regelmässig zur Bezeichnung kleineren Wasserfahzeuge wie Ruderboote, Sportboote, Paddelboote etc. dient, die in der Regel nicht eingedeckt sind \cite{noauthor_boot_2023}. 
 
-Ein Segelschiff ist ein Schiff, das für die Fortbewegung mit Segeln versehen ist. Ein Segelschiff, das mit oder ohne gesetzte Segel unter Motor fährt, gilt rechtlich nicht als Seegelschiff, sondern als Schiff mit Maschinenantrieb (Artikel 2 Abs. 1 lit. a Ziffer 9 Binnenschifffahrtsverordnung). 
+Ein Segelschiff ist ein Schiff, das für die Fortbewegung mit Segeln versehen ist. Ein Segelschiff, das mit oder ohne gesetzte Segel unter Motor fährt, gilt rechtlich nicht als Segelschiff, sondern als Schiff mit Maschinen antrieb (Artikel 2 Abs. 1 lit. a Ziffer 9 Binnenschifffahrtsverordnung). 
 
 Ein Schiff ist folglich nur dann ein Segelschiff, wenn es:\\
 (a) für die Fortbewegung mit Segeln versehen ist, und\\
@@ -20,11 +20,11 @@ Ein Schiff ist folglich nur dann ein Segelschiff, wenn es:\\
 Der Einsatz von Motoren für andere Zwecke als der Fortbewegung, zum Beispiel für das Setzen von Segeln oder das Bewegen des Ruders, ändert aber nichts an der Klassierung eines Wasserfahrzeuges als Segelschiff. 
 
 \subsection{Autonomie}
-Autonom ist ein Segelboot dann, wenn es selbständig, also autonom und ohne eigene Mannschaft oder Einflussnahme durch eine Mannschaft von aussen operieren kann. Es benötigt dazu einzig die Vorgabe eines Ziels; danach sucht es selbständig den Weg zu diesem vorgegebenen Ziel oder auch zu mehreren vorgegebenen Zielen. Autonome Boote unterscheiden sich damit von Roboterschiffen oder Drohenschiffen, die von einer Mannschaft ferngesteuert operiert werden. Der Begriff ``robotoc sailing`` wird in der englischen Sprache allerdings oft als Synonym für autonomes Segeln verwendet. In dieser Arbeit werden autonome Boote und  Roboterboote aber unterschieden. 
+Autonom ist ein Segelboot dann, wenn es selbstständig, also autonom und ohne eigene Mannschaft oder Einflussnahme durch eine Mannschaft von aussen operieren kann. Es benötigt dazu einzig die Vorgabe eines Ziels; danach sucht es selbstständig den Weg zu diesem vorgegebenen Ziel oder auch zu mehreren vorgegebenen Zielen. Autonome Boote unterscheiden sich damit von Roboterschiffen oder Drohenschiffen, die von einer Mannschaft ferngesteuert operiert werden. Der Begriff \enquote{robotoc sailing} wird in der englischen Sprache allerdings oft als Synonym für autonomes Segeln verwendet. In dieser Arbeit werden autonome Boote und  Roboterboote aber unterschieden.
 
 Damit ein Segelboot autonom ist, muss es in der Lage sein, nach der einmaligen Vorgabe eines Zielpunktes: 
 \begin{itemize}
-    \item seine Ausgangsposition selbständig zu ermitteln,
-    \item das vorgegebene Ziel selbständig zu suchen und allein unter Nutzung der Windkraft selbständig anzusteuern,
-    \item den einmal gewählten Kurs unter Berücksichtigung der herrschenden und sich ändernden Umweltbedingungen, insbesondere Wind oder Strömung selbständig so anzupassen, dass es das Ziel planmässig und nicht nur zufällig erreicht.
+    \item seine Ausgangsposition selbstständig zu ermitteln,
+    \item das vorgegebene Ziel selbstständig zu suchen und allein unter Nutzung der Windkraft selbstständig anzusteuern,
+    \item den einmal gewählten Kurs unter Berücksichtigung der herrschenden und sich ändernden Umweltbedingungen, insbesondere Wind oder Strömung selbstständig so anzupassen, dass es das Ziel planmässig und nicht nur zufällig erreicht.
 \end{itemize}

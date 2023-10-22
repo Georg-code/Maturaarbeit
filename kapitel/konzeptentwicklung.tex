@@ -4,13 +4,11 @@
 \section{Zielsetzung}
 Das Ziel dieser Arbeit ist es, ein autonomes Segelboot zu entwerfen, zu konstruieren und zu bauen. Dabei soll günstiges und einfach zu verarbeitendes Konstruktonsmaterial verwendet werden, das in Baumärkten erworben werden kann, mit Werkzeugen gearbeitet werden, die in einer gut bestückten Handwerkerwerkstatt vorhanden sind, die Navigation und Steuerung selbst entworfen werden und die dafür notwendigen Programme selbst entwickelt werden. 
 
-?????? Dazu soll mittels eines CAD-Programmes (CAD = Computer Aided Design) computergestützt ein Segelboot entworfen werden, um anschliessend nach den mit dem CAD-Programm erstellten Plänen gebaut zu werden. Das Segelboot soll mit allen zur autonomen Navigation und Steuerung erforderlichen Geräten, Rechnern und Sensoren sowie der zu deren Betrieb erforderlichen autonomen Energieversorgung ausgerüstet werden. Schliesslich soll das Segelboot mit Programmen ausgestattet werden, die es ihm erlauben, bei allen möglichen Windrichtungen den vordefinierten Zielpunkt anzusteuern und selbst bei einer Veränderung der Windrichtung selbständig zu erreichen.
+%?????? Dazu soll mittels eines CAD-Programmes (CAD = Computer Aided Design) computergestützt ein Segelboot entworfen werden, um anschliessend nach den mit dem CAD-Programm erstellten Plänen gebaut zu werden. Das Segelboot soll mit allen zur autonomen Navigation und Steuerung erforderlichen Geräten, Rechnern und Sensoren sowie der zu deren Betrieb erforderlichen autonomen Energieversorgung ausgerüstet werden. Schliesslich soll das Segelboot mit Programmen ausgestattet werden, die es ihm erlauben, bei allen möglichen Windrichtungen den vordefinierten Zielpunkt anzusteuern und selbst bei einer Veränderung der Windrichtung selbständig zu erreichen.
 
 \section{Methodische Vorgehen}
 
-In einem ersten Schritt wird ein Überblick über die bekannten autonomen Segelboote und Segelbootprojekte gewonnen. Im obigen Kapitel \ref{chap:literaturübersicht} werden die relevanten Arbeiten aufgeführt. Anschliessend wird geklärt, ob ein autonomes Segelboot in der Schweiz überhaupt betrieben werden darf (Kapitel 3.3). Dann werden die Anforderungen an ein autonomes Segelboot, das den Zielsetzung dieser Arbeit entspricht, analysiert (Kapitel 3.4). Im folgenden Schritt werden Überlegungen zum Design angestellt. Dabei werden die möglichen Segelbootstypen anhand der Hauptelement Rumpfzahl, Segelart und Kielart und deren Bedeutung für das Projekt diskutiert. Anschliessend wird der Designentscheid und der Materialentscheid getroffen und begründet. In nächsten Schritt wird der Konstruktionsprozess und die Konstruktion beschrieben. Danach erfolgt die Beschäftigung mit der Elektronik, also dem Rechner, den Sensoren und den Motoren,  
-
-
+In einem ersten Schritt wird ein Überblick über die bekannten autonomen Segelboote und Segelbootprojekte gewonnen. Im obigen Kapitel \ref{chap:literaturübersicht} werden die relevanten Arbeiten aufgeführt. Anschliessend wird geklärt, ob ein autonomes Segelboot in der Schweiz überhaupt betrieben werden darf (Kapitel 3.3). Dann werden die Anforderungen an ein autonomes Segelboot, das den Zielsetzung dieser Arbeit entspricht, analysiert (Kapitel 3.4). Im folgenden Schritt werden Überlegungen zum Design angestellt. Dabei werden die möglichen Segelbootstypen anhand der Hauptelement Rumpfzahl, Segelart und Kielart und deren Bedeutung für das Projekt diskutiert. Anschliessend wird der Designentscheid und der Materialentscheid getroffen und begründet. In nächsten Schritt wird der Konstruktionsprozess und die Konstruktion beschrieben. Danach erfolgt die Beschäftigung mit der Elektronik, also dem Rechner, den Sensoren, den Motoren und der Energieversorgung  
 
 Konzeption, der Entwurf, die Konstruktion und der Bau des Bootskörpers sowie des Segels beschrieben. In einem zweiten Teil wird die
 
@@ -55,7 +53,7 @@ Ausgehend von der Zielsetzung werden in einem ersten Schritt die Anforderungen a
     \item Muss über einen Namen verfügen und mit dem Namen und der Adresse des Eigentümers versehen sein 
     \item bei starkem Wellengang und starkem Wind nicht kentern
     \item darf nicht aus Metall aufbegaut sein, da keine Metallbearbeitungsmaschinen vorhanden sind
-    \item sich in einem See bewegen können, ohne auf Grund zu laufen, wenn dem Boot eine Karte des Sees eingespeist wird ????
+    \item sich in einem See bewegen können, ohne auf Grund zu laufen, wenn dem Boot eine Karte mit Hindernissen eingespeist wird
 \end{itemize}
 
 Kein Fokus auf Geschwindigkeit
@@ -66,7 +64,7 @@ Keine Erkennung von Hindernissen wie andere Boote etc.
 \section{Bestätigung des Entscheids für eine vollständige Eigenentwicklung}
 Segelboote im Grössenbereich von 2 m bis 2.5 m werden weder kommerziell angeboten noch industriell gefertigt. Für das vorliegende Projekt kann daher nicht auf einen bestehenden Bootstypus zurückgegriffen werden. Ein einfacher Erwerb eines solchen Bootes, um es in ein autonomes Boot umzubauen, würde der Zielsetzung widersprechen, selbst wenn ein entsprechendes Exemplar käuflich erworben werden könnte.
 
-Für Modellbauer werden Bausätze für ferngesteuerte Segelboote angeboten, allerdings nur bis zu einer Gesamtlänge von etwa 1,6 m. Die Bootskörper dieser Modelle sind zu knapp bemessen, um die Navigations- und Steuerungselekronik und die Energieversorgung unterzubringen. Sodann werden Bausätze für bemannte kleine Segelboote wie Optimisten etc. angeboten. Diese kosten mehrere tausend Franken und überschreiten die Maximallänge von 2,5 m. Schliesslich werden fertige Baupläne für Modellsegelboote zum Kauf angeboten. Diese Modelle erreichen mit ganz wenigen Ausnahmen nicht die erforderlichen Dimensionen und sind zu Lasten der Stabilität auf optimale Segeleigenschaften ausgelegt. 
+ Es werden Bausätze für bemannte kleine Segelboote wie Optimisten etc. angeboten. Diese kosten mehrere tausend Franken und überschreiten die Maximallänge von 2,5 m. Ebenfalls werden fertige Baupläne für Modellsegelboote zum Kauf angeboten. Diese Modelle erreichen mit ganz wenigen Ausnahmen nicht die erforderlichen Dimensionen und sind zu Lasten der Stabilität auf optimale Segeleigenschaften ausgelegt. 
 
 Da nicht auf ein bestehendes Modell zurückgegriffen werden kann, muss das Segelboot für dieses Projekt auf jeden Fall vollständig neu entwickelt werden. 
 
