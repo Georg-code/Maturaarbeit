@@ -5,11 +5,16 @@
 % (lecture notes) project which was adapted by Karel Kubicek from whom I adpated it. This template is under the CC0 license.
 
 % Electronic version that does not waste space
-%\documentclass[11pt,a4paper,openany,oneside]{memoir}
+\documentclass[11pt,a4paper,openany,oneside]{memoir}
 
 % Printable version that does waste space (but people like it), uncomment for printing. Only use for printing
-\documentclass[11pt,a4paper]{memoir}
+%\documentclass[11pt,a4paper,final]{memoir}
 \usepackage{glossaries}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\usepackage{ wasysym }
 %% Packages
 %% ========
 
@@ -77,10 +82,10 @@ backend=biber
 
 \title{Entwurf, Konstruktion und Bau eines autonomen Segelboots}
 \author{Georg Alejandro Niggli}
-\thesistype{Maturaarbeit}
+\thesistype{Schweizer Jugend Forscht}
 \advisors{Betreung: Dr. Carola Ebenhoch}
 \department{Fachschaft Physik}
-\date{23.10.2023}
+\date{30.3.2025}
 \begin{document}
 
 \frontmatter
@@ -108,11 +113,11 @@ backend=biber
 \input{kapitel/literaturübersicht}
 \input{kapitel/konzeptentwicklung}
 \input{kapitel/konstruktion}
-\input{kapitel/elektronik}
-\input{kapitel/autonomie}
+\input{kapitel/elektronikv2}
+\input{kapitel/navigation}
 \input{kapitel/herstellung}
-%\input{kapitel/tests}
-%\input{kapitel/diskussion}
+\input{kapitel/tests}
+\input{kapitel/diskussion}
 \input{kapitel/fazit}
 \input{kapitel/danksagung}
 
@@ -124,8 +129,10 @@ backend=biber
 
 \appendix
 \input{appendix/schaltplan}
+\includepdf[pages={2-4}]{assets/schematic.pdf}
 \input{appendix/algorythmus}
-\input{appendix/datasheets}
+
+
 
 \includepdf[]{assets/redlichkeit.pdf}
 

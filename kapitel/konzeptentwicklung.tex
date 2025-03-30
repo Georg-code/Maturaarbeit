@@ -2,63 +2,56 @@
 \chapter{Konzeptentwicklung }
 \label{chap:konzeptentwicklung}
 \section{Zielsetzung}
-Das Ziel dieser Arbeit ist es, ein autonomes Segelboot zu entwerfen, zu konstruieren und zu bauen. Dabei soll günstiges und einfach zu verarbeitendes Konstruktonsmaterial verwendet werden, das in Baumärkten erworben werden kann, mit Werkzeugen gearbeitet werden, die in einer gut bestückten Handwerkerwerkstatt vorhanden sind, die Navigation und Steuerung selbst entworfen werden und die dafür notwendigen Programme selbst entwickelt werden. 
+Das Ziel dieser Arbeit ist es, ein autonomes Segelboot zu entwerfen, zu konstruieren und zu bauen. Dabei soll günstiges und einfach zu verarbeitendes Konstruktionsmaterial verwendet werden. Die Navigation und Steuerung soll selbst entworfen werden und die dafür notwendigen Programme selbst entwickelt werden. 
 
 \section{Methodisches Vorgehen}
 
-In einem ersten Schritt wird ein Überblick über die bekannten autonomen Segelboote und Segelbootprojekte gewonnen. Im obigen Kapitel \ref{chap:literaturübersicht} werden die relevanten Arbeiten aufgeführt. Anschliessend wird geklärt, ob ein autonomes Segelboot in der Schweiz überhaupt betrieben werden darf (Kapitel 3.3). Dann werden die Ergebnisse der detaillierten Analyse Anforderungen an ein autonomes Segelboot, das der Zielsetzung dieser Arbeit entspricht, aufgelistet (Kapitel 3.4). Im folgenden Schritt werden Überlegungen zum Design des Bootes angestellt. Dabei werden die möglichen Segelbootstypen anhand der Hauptelemente Rumpfzahl, Segelart und Kielart und deren Bedeutung für das Projekt diskutiert. Anschliessend wird der Designentscheid und der Hauptmaterialentscheid getroffen und begründet. Im nächsten Schritt wird der Konstruktionsprozess und die Konstruktion des Bootes beschrieben. Danach folgt die Beschäftigung mit der Elektronik, also dem Rechner, den Sensoren, den Motoren und der Energieversorgung. Alsdann werden nach einer Kurzeinführung in die Segeltheorie und der Beschreibung der Software Architektur, die bekannten Wegfindungsalgorithmen diskutiert und für das Projekt entworfen. Anschliessend wird ein selbstentwickelter Navigationsansatz vorgestellt und eine ebenfalls selbstentwickelte einfache Methode zur Kollisionsverhinderung mit bekannten Hindernissen diskutiert. Schliesslich wird die Steuerung von Segel und Ruder beschrieben. Daran schliesst der Beschrieb des Baus des Bootes, des Einbaus der Elektronik und der Bemalung an. Am Schluss wird vor dem Hintergrund der gemachten Erfahrung das Verbesserungspotenzial diskutiert.
+In einem ersten Schritt wird ein Überblick über die bekannten autonomen Segelboote und Segelbootprojekte gewonnen. Im obigen Kapitel \ref{chap:literaturübersicht} werden die relevanten Arbeiten aufgeführt. Anschliessend wird geklärt, ob ein autonomes Segelboot in der Schweiz überhaupt betrieben werden darf (Kapitel 3.3). Dann werden die Ergebnisse der detaillierten Analyse Anforderungen an ein autonomes Segelboot, das der Zielsetzung dieser Arbeit entspricht, aufgelistet (Kapitel 3.4). Im folgenden Schritt werden Überlegungen zum Design des Bootes angestellt. Dabei werden die möglichen Segelbootstypen anhand der Hauptelemente Rumpfzahl, Segelart und Kielart und deren Bedeutung für das Projekt diskutiert. Anschliessend wird der Designentscheid und der Hauptmaterialentscheid getroffen und begründet. Im nächsten Schritt wird der Konstruktionsprozess und die Konstruktion des Bootes beschrieben. Danach folgt die Beschäftigung mit der Elektronik, also dem Rechner, den Sensoren, den Motoren und der Energieversorgung. Alsdann werden nach einer Kurzeinführung in die Segeltheorie und der Beschreibung der Software Architektur die bekannten Wegfindungsalgorithmen diskutiert und für das Projekt entworfen. Anschliessend wird ein selbstentwickelter Navigationsansatz vorgestellt. Schliesslich wird die Steuerung von Segel und Ruder beschrieben. Daran schliesst der Beschrieb des Baus des Bootes, des Einbaus der Elektronik und der Bemalung an. Am Schluss wird vor dem Hintergrund der gemachten Erfahrung das Verbesserungspotenzial diskutiert.
 \section{Gesetzliche Rahmenbedingungen}
 
-Das projektierte autonome Segelboot ist ein Segelschiff im Sinne der Binnenschifffartsverordnung (siehe Kapital 1.2 oben) und fällt damit grundsätzlich unter die einschlägigen gesetzlichen Zulassungs-, Betriebs- und Verkehrsbestimmungen. Da es aber kürzer als 2.5 m ist, ist es von der Kennzeichnungspflicht mit einem behördlich zugeteilten Kennzeichen ausgenommen (Artikel 16 Abs. 2 Buchstabe b der Binnenschifffartsverordnung). Es benötigt damit gemäss Art. 92 der Binnenschiffartsverordnung auch keinen Schiffsausweis, womit auch eine behördliche Zulassungsprüfung entfällt. Das Boot muss aber einen Schiffsnamen tragen, der sich sowohl aus Buchstaben als auch aus Zahlen zusammensetzen kann. Ausserdem muss es mit dem Namen und der Adresse des Eigentümers versehen sein (Art. 16 Abs. 3 Binnenschifffartsverordnung). 
+Das projektierte autonome Segelboot ist ein Segelschiff im Sinne der Binnenschifffartsverordnung (siehe Kapital 1.2 oben) und fällt damit grundsätzlich unter die einschlägigen gesetzlichen Zulassungs-, Betriebs- und Verkehrsbestimmungen. Da es aber kürzer als 2.5 m ist, ist es von der Kennzeichnungspflicht mit einem behördlich zugeteilten Kennzeichen ausgenommen (Artikel 16 Abs. 2 Buchstabe b der Binnenschifffartsverordnung). Es benötigt damit gemäss Art. 92 der Binnenschiffartsverordnung auch keinen Schiffsausweis, womit auch eine behördliche Zulassungsprüfung entfällt.
 
-Art. 42 der Binnenschifffahrtsverordnung schreibt vor, dass Schiffe, die kürzer als 2,5 m sind, nur in der inneren Uferzone (150 m) oder im Abstand von höchstens 150 m um sie begleitende Schiffe herum verkehren dürfen. Autonome Segelboote in der Grössenordnung dieses Projektes können in der Schweiz damit nicht einfach sich selbst überlassen werden, sondern müssen im Einsatz aus der Distanz von einem andern, bemannten Schiff  begleitet und beobachtet werden.  
+Art. 42 der Binnenschifffahrtsverordnung schreibt vor, dass Schiffe, die kürzer als 2,5 m sind, nur in der inneren Uferzone (150 m) oder im Abstand von höchstens 150 m um sie begleitende Schiffe herum verkehren dürfen. Autonome Segelboote in der Grössenordnung dieses Projektes können in der Schweiz damit nicht einfach sich selbst überlassen werden, sondern müssen im Einsatz aus der Distanz von einem andern bemannten Schiff begleitet und beobachtet werden.  
 
-Gemäss Art. 16 Abs. 1 des Bundesgesetzes über die Binnenschifffahrt (BSG) vom 3. Oktober 1975 muss jedes Schiff einen verantwortlichen Führer haben. Da sich autonome Segelboote definitionsgemäss gerade dadurch auszeichnen, dass sie keinen Schiffsführer haben, scheint diese Bestimmung einem Einsatz von autonomen Segelboote in der Schweiz entgegen stehen. Nach Abs. 2 dieser Bestimmung gilt als Schiffsführer, wer die tatsächliche Befehlsgewalt innehat. Entscheidend dabei ist, dass nicht verlangt wird, dass die Befehlsgewalt tatsächlich dauernd ausgeübt wird, sondern dass es genügt, wenn diese ausgeübt werden kann. Hierbei muss es genügen, wenn eine natürliche Person jederzeit mittels Funk Befehle an das autonomes Schiff senden kann und sich das Boot jederzeit in Sichtweite der Person befindet. Letztes ist auf Grund der Vorgaben von Art. 42 der Binnenschifffahrtsverordnung sowieso erforderlich und bedeutet deshalb keine zusätzliche Einschränkung.
+Gemäss Art. 16 Abs. 1 des Bundesgesetzes über die Binnenschifffahrt (BSG) vom 3. Oktober 1975 muss jedes Schiff einen verantwortlichen Führer haben. Da sich autonome Segelboote definitionsgemäss gerade dadurch auszeichnen, dass sie keinen Schiffsführer haben, scheint diese Bestimmung einem Einsatz von autonomen Segelbooten in der Schweiz entgegen stehen. Nach Abs. 2 dieser Bestimmung gilt als Schiffsführer, wer die tatsächliche Befehlsgewalt innehat. Entscheidend dabei ist, dass nicht verlangt wird, dass die Befehlsgewalt tatsächlich dauernd ausgeübt wird, sondern dass es genügt, wenn diese ausgeübt werden kann. Hierbei muss es genügen, wenn eine natürliche Person jederzeit mittels Funk Befehle an das autonome Schiff senden kann und sich das Boot jederzeit in Sichtweite der Person befindet. Letztes ist aufgrund der Vorgaben von Art. 42 der Binnenschifffahrtsverordnung sowieso erforderlich und bedeutet deshalb keine zusätzliche Einschränkung.
 
 Unter diesen Parametern ist der Betrieb eines autonomen Segelbootes aber ohne einen Schiffsfüherausweis möglich, solange dessen Segelfläche nicht mehr als 15 Quadratmeter beträgt (Art. 78 Abs. 1 Buchstabe b Binnenschifffahrtsverordnung). Es besteht auch keine Haftpflichtversicherungspflicht (Art. 153 Abs. 1 Binnenschifffahrtsverordnung). 
 
 Bei Nacht oder bei unsichtigem Wetter muss das Segelboot mit a. getrennten Seitenlichtern und einem Hecklicht; b. einem Kombinations-Seitenlicht und einem Hecklicht; c einem Dreifarben-Topplicht; oder
 d. einem weisses Rundumlicht ausgestattet werden (Art. 25 Abs. 2 Binnenschifffahrtsverordnung)
 
-Ein autonomes Segelboot mit einer Länge von weniger als 2,5 m und einer Segelfläche von maximal 15 Quadratmetern kann auf Schweizer Gewässern also verkehren, sofern es von einem anderen Boot begleitet wird, welches maximal 150 m entfernt ist, und sofern eine natürliche Person auf diesem Begleitboot Befehlsgewalt über das autonome Segelboot ausüben kann, zum Beispiel indem diesem per Funk Befehle übermittelt werden oder indem es physisch behändigt wird.
 
-Ein Einsatz ohne begleitende Überwachung ist in der Schweiz zur Zeit ohne behördliche Ausnahmebewilligung nicht zulässig.
-\section{Anforderungsanalyse}
-Ausgehend von der Zielsetzung werden in einem ersten Schritt die Anforderungen an das autonome Segelboot und dessen Entwurf, Konstruktinon und Bau analysiert und die Kriterien detailliert festgehalten, 
+Ein Einsatz ohne begleitende Überwachung ist in der Schweiz zurzeit ohne behördliche Ausnahmebewilligung nicht zulässig.
 
-Das Boot muss: 
+
+\section{Anforderungen an das Segelboot}
 \begin{enumerate}
     \item den Wind zum Antrieb mit Segeln nutzen (keine Windturbine);
-    \item selbständig den Weg in ein vorgegebenes  Ziel finden und ansteuern können;
-    \item selbständig mehrere vorgegebene Ziele in der vorgegebenen Reihenfolge ansteuern können;
+    \item selbstständig den Weg in ein vorgegebenes Ziel finden und ansteuern können;
+    \item selbstständig mehrere vorgegebene Ziele in der vorgegebenen Reihenfolge ansteuern können;
     \item über eine selbst entworfene und gebaute Navigationsanlage und Steuerung verfügen;
     \item die Navigation- und Steuerungsanlage mit selbstentwickelten Programmen betreiben; 
     \item vordefinierten Gefahrenpunkten ausweichen können;
     \item sich auf einem Flachgewässer autonom und sicher bewegen können;
     \item eine Kollision mit einem auf einem Flachgewässer schwimmenden Stück Holz ohne Funktionseinbussen überstehen können;
-    \item drahtlos via WLAN Befehle und Zieleingaben empfangen können;
+    \item drahtlos via Bluetooth Befehle und Zieleingaben empfangen können;
     \item mit überschaubaren Kosten gebaut werden können;
-    \item aus günstigen, einfach verfügbaren, in Baumärkten erhältlichen Konstruktionsmaterialien gebaut werden;
     \item aus einfach zu verarbeitenden Konstruktionsmaterialien gebaut werden;
     \item von einer Person allein entworfen, konstruiert und gebaut werden können;
-    \item mit Werkzeugen gebaut werden können, die in einer gut bestückten Handwerkerwerkstatt vorhanden sind, oder selber gebaut werden; 
     \item stabil schwimmen;
-    \item kentersicher sein;
     \item mit einem Fokus auf Stabilität konstruiert werden;
     \item über eine autarke Energieversorgung verfügen;
-    \item über eine Energiereserve von mindestens 72 h verfügen;
+    \item über eine Energiereserve von mindestens 48 h verfügen;
     \item auf Schweizer Gewässern zumindest unter Aufsicht verkehren dürfen;
-    \item über eine Segelfläche von maximal 15m2 verfügen;
+    \item über eine Segelfläche von maximal 15 m2 verfügen;
     \item über maximal ein Segel verfügen;
     \item mit einer einfachen Beleuchtung ausgestattet sein;
-    \item mit einer auffälligen Farbe bemahlt sein;
     \item an Land mit einem Personenfahrzeug an ein Flachgewässer transportiert werden können; und
-    \item     mit dem Namen und der Adresse des Eigentümers versehen sein.
     \end{enumerate}
 
 Bewusst kein Gewicht wird auf die Optimierung der Geschwindigkeit des Boots, seine elegante Erscheinung, die Ermittlung des kürzesten Wegs ins Ziel, der Berechnung des optimalen Wegs zum Besuch mehrere vorgegebener Ziele (Problem des Handelsreisenden) und die Erkennung und Vermeidung von beweglichen Hindernissen wie andere Boote gelegt. 
 
 Segelboote im Grössenbereich von 2 m bis 2.5 m werden weder kommerziell angeboten noch industriell gefertigt. Für das vorliegende Projekt kann daher nicht auf einen bestehenden Bootstypus zurückgegriffen werden. Ein einfacher Erwerb eines solchen Bootes, um es in ein autonomes Boot umzubauen, würde der Zielsetzung widersprechen, selbst wenn ein entsprechendes Exemplar käuflich erworben werden könnte.
 
-Es werden Bausätze für bemannte kleine Segelboote wie Optimisten etc. angeboten. Diese kosten mehrere tausend Franken und überschreiten die Maximallänge von 2,5 m. Ebenfalls werden fertige Baupläne für Modellsegelboote zum Kauf angeboten. Diese Modelle erreichen mit ganz wenigen Ausnahmen nicht die erforderlichen Dimensionen und sind zu Lasten der Stabilität auf optimale Segeleigenschaften ausgelegt. 
+Es werden Bausätze für bemannte kleine Segelboote wie Optimisten etc. angeboten. Diese kosten mehrere tausend Franken und überschreiten die Maximallänge von 2,5 m. Ebenfalls werden fertige Baupläne für Modellsegelboote zum Kauf angeboten. Diese Modelle erreichen mit ganz wenigen Ausnahmen nicht die erforderlichen Dimensionen und sind zulasten der Stabilität auf optimale Segeleigenschaften ausgelegt.
 

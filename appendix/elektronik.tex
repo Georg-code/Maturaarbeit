@@ -1,7 +1,12 @@
 
 
-\chapter{Elektronik}
-\label{chap:elektronik}
+\chapter{Erste Iteration der Elektronik}
+\label{appendix:elektronik}
+
+
+Im folgenden wird die erste Iteration der Elektronik beschrieben.
+
+
 \section{Mikrocontroller }
 Für die Steuerung des Bootes wird ein Raspberry Pi Zero W 1.1 verwendet. Dieser verfügt über ausreichend Rechenleistung, um alle notwendigen Berechnungen in Echtzeit durchzuführen. Er verfügt über einen einkernigen ARM Prozessor, der mit 400 MHz getaktet ist. Sein Arbeitsspeicher beträgt 512 Megabyte. Er ist 6,5 mal 3,2 cm gross und wiegt nur 9 Gramm.
 
@@ -21,7 +26,7 @@ Der Raspberry Pi Zero W 1.1 wird mit 5 V Gleichspannung betrieben. Sein Stromver
 \cite{noauthor_raspberry_2023} im Leerlauf braucht er aber nur 120 mA.
 \cite{noauthor_stromverbrauch_nodate}
 
-Die Spromversorgung des Raspberry Pi Zero W 1.1 ist über einen seiner 5V Pins vorgesehen und nicht über seine Micro-USB Buchse. Dieser Vorgehensweise hat den Nachteil, dass der Raspberry Pi Zero W 1.1 damit nicht von der Schutzschaltung hinter der Micro-USB Buchse geschützt wird. Der wesentliche Vorteil der Vorgehensweise ist jedoch, dass verlötete Verbindungen viel stabiler sind als gesteckte und ohne erhebliche 
+Die Stromversorgung des Raspberry Pi Zero W 1.1 ist über einen seiner 5 V Pins vorgesehen und nicht über seine Micro-USB Buchse. Dieser Vorgehensweise hat den Nachteil, dass der Raspberry Pi Zero W 1.1 damit nicht von der Schutzschaltung hinter der Micro-USB Buchse geschützt wird. Der wesentliche Vorteil der Vorgehensweise ist jedoch, dass verlötete Verbindungen viel stabiler sind als gesteckte und ohne erhebliche 
 direkte Gewalteinwirkung nicht brechen. Da der Raspberry Pi Zero W 1.1 auf dem Boot dauernd bewegt wird, ist die Stabilität der Verbindungen von entscheidender Wichtigkeit, denn ein Ausfall der Bordelektronik hätte für das Boot katastrophale Folgen. 
 \section{Sensoren und Aktuatoren}
 \subsection{Positionsbestimmung (GPS)}
@@ -34,7 +39,7 @@ Zur Positionsbestimmung, also der Bestimmung des aktuellen Standorts des Segelbo
 \end{figure}
 
 
-Das Modul wird über die vorhandenen Pins mit dem Raspberry Pi Zero W 1.1 verdrahtet und  kommuniziert über eine serielle Verbindung. Die Pins TX und RX werden dabei mit den Pins RX und TX des Raspberry Pi Zero W 1.1 verbunden. Das Modul wird mit 5 V betrieben. Dazu wird sein Pin VCC mit der 5 V Gleichspannungsleitung und sein Pin GND mit der Ground Leitung der Stromversorgung verbunden.   
+Das Modul wird über die vorhandenen Pins mit dem Raspberry Pi Zero W 1.1 verdrahtet und kommuniziert über eine serielle Verbindung. Die Pins TX und RX werden dabei mit den Pins RX und TX des Raspberry Pi Zero W 1.1 verbunden. Das Modul wird mit 5 V betrieben. Dazu wird sein Pin VCC mit der 5 V Gleichspannungsleitung und sein Pin GND mit der Ground Leitung der Stromversorgung verbunden.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{vma430_front-1.jpg}
@@ -66,22 +71,22 @@ Das Sensormodul wird mit einer Eingangsspannung von 3-5 V Gleichspannung betrieb
 Die Kommunikation mit dem Raspberry Pi Zero W 1.1 erfolgt über eine serielle Verbindung. Der Pin SCL und der Pin SDA des Moduls werden dafür mit den Pins SCL und SDA des Raspberry Pi Zero W 1.1 verdrahtet.
 
 \subsection{Eigenentwicklung des Windrichtungssensors}
-Der Windrichtungssenor muss selbst entwickelt und gebaut werden, da die am Markt angebotenen Windrichtungsmesser entweder zu gross und zu schwer oder unerschwinglich teuer sind.
+Der Windrichtungssensor muss selbst entwickelt und gebaut werden, da die am Markt angebotenen Windrichtungsmesser entweder zu gross und zu schwer oder unerschwinglich teuer sind.
 
 Windrichtungssensoren lassen sich in zwei unterschiedliche Typen einteilen. Der erste Typ verwendet ein Potenziometer zur Richtungsbestimmung. Solche Messgeräte sind mechanisch sehr leicht umzusetzen, da dazu lediglich ein kleiner Flügel an der Achse eines Potenziometers befestigt werden muss. Die Position des Flügels kann damit über einen analogen Input Pin mit einem Mikrocontroller eingelesen und daraus die Richtung des Windes abgeleitete werden. Der Nachteil dieses Typs ist, dass die freie Drehung der Achse durch die Reibung das Potenziometers stark abgebremst wird. Dieser Typ wird daher nicht weiter verfolgt.
 
 Der andere Typ verwendet Hallsensoren, welche den Hall-Effekt zur Messung von 
 Magnetfeldern nutzen \cite{noauthor_hall-sensor_2023}. Sie sind passive Sensoren, die den Spannungsunterschied messen, der an einem elektrischen Leiter erzeugt wird, wenn ein Magnetfeld senkrecht zur Fliessrichtung eines elektrischen Stroms steht \cite{noauthor_alles_nodate}. Um die Rotation eines Objektes mittels Hallsensoren zu messen, gibt es die folgenden zwei Möglichkeiten:
 
-Bei der ersten Variante wird um ein abwechselnd magnetisch positiv und magnetisch negativ geladenes rundes Objekt mehrere Hallsensoren platziert. Damit kann dann die Drehung des Objektes gemessen werden. Diese Variante ist praktisch schwierig umzusetzen, weil viele Hall Sensoren präzis kreisförmig um eine Achse angeordnet werden müssen. Dafür müssten die Hallsensoren in enger Folge auf einer individuell entworfenen Platine verlötet werden. Der Entwurf einer solchen Platine ist anspruchsvoll, mit deren Herstellung müssten Auftragsfertiger beauftragt werden, was hohe Kosten verursachen würde. Weil die Hallsensoren sehr eng aneinander platziert werden müssten, müssten sogenannte SMD Varianten (Surface Mountable Device; deutsch: oberflächenmontierbare Bauteile) verwendet werden, die ohne Bohrungen direkt auf die Oberfläche der Platine gelötet werden. Es braucht dafür eine spezielle Löttechnik und die Gefahr, dass Bauteile beim Lötvorgang den Hitzetod sterben, ist erheblich, wenn der Lötende über wenig Übung mit SMD Löttechnik verfügt. Diese Varianten wird daher nicht weiter verfolgt.
+Bei der ersten Variante wird um ein abwechselnd magnetisch positiv und magnetisch negativ geladenes rundes Objekt mehrere Hallsensoren platziert. Damit kann dann die Drehung des Objektes gemessen werden. Diese Variante ist praktisch schwierig umzusetzen, weil viele Hall Sensoren präzis kreisförmig um eine Achse angeordnet werden müssen. Dafür müssten die Hallsensoren in enger Folge auf einer individuell entworfenen Platine verlötet werden. Der Entwurf einer solchen Platine ist anspruchsvoll, mit deren Herstellung müssten Auftragsfertiger beauftragt werden, was hohe Kosten verursachen würde. Weil die Hallsensoren sehr eng aneinander platziert werden müssten, müssten sogenannte SMD Varianten (Surface Mountable Device; deutsch: oberflächenmontierbare Bauteile) verwendet werden, die ohne Bohrungen direkt auf die Oberfläche der Platine gelötet werden. Es braucht dafür eine spezielle Löttechnik und die Gefahr, dass Bauteile beim Lötvorgang den Hitzetod sterben, ist erheblich, wenn der Lötende über wenig Übung mit SMD Löttechnik verfügt. Diese Variante wird daher nicht weiter verfolgt.
 
 Die zweite Variante ist praktisch einfacher umzusetzen. Statt normale Hall Sensoren werden dabei spezielle, sogenannten Rotary Hall (deutsch rotierende magnetische Hall) Encoder verwendet. Ein Encoder (oder Messwertgeber) dient in der Antriebstechnik zur Signalbildung aus mechanischen Bewegungen. Er erkennt die Position einer Antriebseinheit (Welle) und gibt diese als elektrisches Signal aus. \cite{noauthor_was_nodate} Rotary Hall Encoder sind komplexe Bauteile, die fast immer als System-on-Chip gefertigt, in dem integrierte Hall-Elemente, analoges Frontend und digitale Signalverarbeitung in einem einzigen Gerät integriert sind. Zur Messung des Winkels wird nur ein einfacher zweipoliger Magnet benötigt, der sich der sich über oder unter der Mitte des Chips dreht.
 
 Zur Funktionsweise von Rotary Hall Encodern: Josef Janisch, Understanding Integrated Hall Effect Rotary Encoders, Nov 1, 2006 1:00am, auf Fierce Electonics \cite{janisch_understanding_2006}.
 
-Für das vorliegende Projekt wird ein Windsensor auf der Basis eines Rotary-Hall-Encoders vorgezogen. Dabei wird der auf einem Adapterboad gelötete AS5040-ASST der österreichischen ams-OSRAM AG verwendet. Das ist ein berührungsloser Rotary Hall Encoder für genaue Winkelmessung über eine volle Umdrehung von 360$^\circ$.  Die absolute Winkelmessung liefert eine sofortige Anzeige der Winkelposition des Magneten mit einer Auflösung von 0,35$^\circ$ = 1024 Positionen pro Umdrehung. Diese digitalen Daten stehen als serieller Bitstrom und als PWM (Pulsweitenmodulation) Signal zur Verfügung. Für das vorliegende Projekt wird nur die PMW Verbindung verwendet, um die absoluten Werte auszulesen.
+Für das vorliegende Projekt wird ein Windsensor auf der Basis eines Rotary-Hall-Encoders vorgezogen. Dabei wird der auf einem Adapterboard gelötete AS5040-ASST der österreichischen ams-OSRAM AG verwendet. Das ist ein berührungsloser Rotary Hall Encoder für genaue Winkelmessung über eine volle Umdrehung von 360$^\circ$.  Die absolute Winkelmessung liefert eine sofortige Anzeige der Winkelposition des Magneten mit einer Auflösung von 0,35$^\circ$ = 1024 Positionen pro Umdrehung. Diese digitalen Daten stehen als serieller Bitstrom und als PWM (Pulsweitenmodulation) Signal zur Verfügung. Für das vorliegende Projekt wird nur die PMW Verbindung verwendet, um die absoluten Werte auszulesen.
 
-Der Encoder kann mit 3,3V oder 5V betrieben werden. Quellen für beide Spannungen sind auf dem Segelboot vorhanden. Es wird ein 3.3V Pin des Raspberry Pi Zero W 1.1 genutzt.
+Der Encoder kann mit 3,3 V oder 5 V betrieben werden. Quellen für beide Spannungen sind auf dem Segelboot vorhanden. Es wird ein 3.3 V Pin des Raspberry Pi Zero W 1.1 genutzt.
 
 \begin{figure}
     \centering
@@ -134,11 +139,11 @@ Die Aktuatorwelle aus Aluminium verfügt über einem Maximalhub von 100 mm. Die 
     \label{fig:actuator}
 \end{figure}
 
-Die Aktuatoren verfügen über kein digitales Positionsfedback, dass heisst, dass nicht abgefragt werden kann, an welcher Position sich das Ende der ausfahrbahren Welle befindet. Es können jedoch konkrete Distanzen angesteuert werden. 
+Die Aktuatoren verfügen über kein digitales Positionsfeedback, das heisst, dass nicht abgefragt werden kann, an welcher Position sich das Ende der ausfahrbaren Welle befindet. Es können jedoch konkrete Distanzen angesteuert werden. 
 
 Über eine einzige Datenleitung können kurze Impulse zwischen 1ms-2ms gesendet werden, wobei 1ms den Aktuator in die Startposition führt und der Aktuator bei 2ms voll ausgefahren wird. Um Einstellungen dazwischen zu erhalten, wird ein Wert zwischen 1ms und 2ms gesendet. 
 
-Die Steuerleitung des Aktuators kann nicht direkt mit dem Raspberry Pi Zero W 1.1 verbunden werden, da dieser an seinen Pins nur 3,3 V Steuersignale ausgibt, der Aktuator aber ein 5 V Steuersignal erwartet. Aus diesem Grund muss zwischen den beiden Aktuatoren und dem Raspberry Pi Zero W 1.1 ein einfacher Pegelumsetzer (lever shifter) geschaltet werden. Es wird das Modell  BOB-12009 des US-amerikanischen Herstellers SparkFun Electronics verwendet.
+Die Steuerleitung des Aktuators kann nicht direkt mit dem Raspberry Pi Zero W 1.1 verbunden werden, da dieser an seinen Pins nur 3,3 V Steuersignale ausgibt, der Aktuator aber ein 5 V Steuersignal erwartet. Aus diesem Grund muss zwischen den beiden Aktuatoren und dem Raspberry Pi Zero W 1.1 ein einfacher Pegelumsetzer (lever shifter) geschaltet werden. Es wird das Modell BOB-12009 des US-amerikanischen Herstellers SparkFun Electronics verwendet.
 \begin{figure} [H]
     \includegraphics[width=1\linewidth]{assets/Sparkfun-BOB-12009-30145425-01.jpg}
     \caption{Pegelumsetzer}
@@ -150,7 +155,7 @@ Der Aktuator zur Bewegung der Sailflaps muss einerseits über den Pegelumsetzer 
 
 Dieser Gefahr kann mit dem Einsatz eines sogenannten Schleifrings begegnet werden.  Ein Schliefring ist ein elektromechanisches Bauteil, das eine elektrische Leistungs- oder Signalübertragung zwischen gegeneinander rotierenden Bauteilen ermöglicht. Er besteht aus einem stromleitenden Ring und Bürsten, die in Kontakt mit diesem Ring stehen. Die Bürsten bestehen aus einem leitfähigen Material und sind mit der stationären Struktur des Systems verbunden. 
 
-Der Schleifring wird am Fuss des Segelmastes montiert und mit dem Schiffskörper verschraubt. Durch den hohlen Mast werden dann die drei Leistungen hinauf zum Segel gezogen und durch ein in den Mast gebohrtes Loch zum Aktuator geführt und mit diesem verbunden.   
+Der Schleifring wird am Fuss des Segelmastes montiert und mit dem Schiffskörper verschraubt. Durch den hohlen Mast werden dann die drei Leistungen hinauf zum Segel gezogen und durch ein in den Mast gebohrtes Loch zum Aktuator geführt und mit diesem verbunden.
 
 \section{Energieversorgung}
 
@@ -166,7 +171,7 @@ Auch die Generierung von elektrischer Energie mithilfe einer Windturbine unter N
 
 Schliesslich würde eine Positionierung am Bug oder Heck je nach vorherrschendem Wind, zu einer vollen oder teilweisen Abschattung des Windrades durch das Segel oder des Segels durch das Windrad führen. Eine Positionierung auf dem Mast würde selbst im Fall eines Vertikalwindrades zu Verwirbelungen führen, welche die Segeleigenschaften des Bootes negativ beeinträchtigen würden.
 
-\subsection{Photovoltaik}
+\subsection{Fotovoltaik}
 Für die Nutzung der Sonnenenergie auf dem autonomen Segelboot kommt nur die Methode der Fotovoltaik infrage. Die für den Betrieb von Wärme-Kraft-Maschinen erforderlichen Temperaturen lassen sich auf einem beweglichen Boot mit Sonnenenergie nicht erreichen.
 
 Die Energieerzeugung mit Fotovoltaikanlagen ist auf Segelbooten beliebt und verbreitet. Solche Anlagen haben keinen Einfluss auf die Segeleigenschaften des Bootes. Die Energieausbeute hängt aber stark vom Sonnenstand und dem vorherrschenden Wetter ab. Im Gegensatz zu stationären Anlagen lassen sich Fotovoltaikanlagen auf Booten nicht ideal auf die Sonne ausrichten und können je nach Kurs sogar vom Segel beschattet werden. Da während der Nachtstunden überhaupt keine Energie gewonnen werden kann, muss das Boot zur Überbrückung zwingend mit einem Energiespeicher ausgerüstet werden.
@@ -184,7 +189,7 @@ Die maximale regulierte Ausgangsleistung beträgt 20 W bei 5 V. Es verfügt übe
     \caption{Pi Juce Solarpanel}
     \label{fig:enter-label}
 \end{figure}
-\subsection{Enegiespeicher (Akku)}
+\subsection{Energiespeicher (Akku)}
 Während der Nachtstunden kann mit dem Solarpanel keine Energie gewonnen werden und bei Nebel ist die Energieausbeute sehr gering. Daher muss das Boot zur Überbrückung dieser Phasen mit einem Energiespeicher ausgerüstet werden, damit seine Autonomie sichergestellt ist.
 
 Es wurde vorgesehen, dass die Energiereserve einen Betrieb während drei Tage (72 h) erlauben soll. Der genaue Energieverbrauch des Rechners, der Sensoren und vor allem der Aktuatoren hängt stark davon ab, wie oft Steuereingriffe vorgenommen werden müssen und Messdatenerfassungen Neuberechnungen erfolgen. Es lässt sich daher nicht präzis berechnen, sondern nur abschätzen.
@@ -235,7 +240,7 @@ TECNOIOT 5 un. 2S 8A Li-Ion Batería Lipo 7.4v 8.4V 18650 protección junta BMS 
     \label{fig:enter-label}
 \end{figure}
 \subsection{Spannungswandler}
-Die Ausgangsspannung des Akkus beträgt 7.4 V. Der Raspberry Pi Zero W 1.1, die Sensoren und die  Aktuatoren werden aber mit 5 V betrieben. Mit einem sogenannten Abwärtsregler (step-down converter) kann die 7.3 V Spannung auf 5 V reduziert werden. Es wird dafür der LM2596S-ADJ DC-DC (Abbildung \ref{fig:lm25}) Spannungswandler eines unbekannten Herstellers verwendet, der bei Aliexpress erworben wurde. Der Abwärtsregler wird zwischen Akkumulator und den Verbrauchern geschaltet.
+Die Ausgangsspannung des Akkus beträgt 7.4 V. Der Raspberry Pi Zero W 1.1, die Sensoren und die Aktuatoren werden aber mit 5 V betrieben. Mit einem sogenannten Abwärtsregler (Step-Down Converter) kann die 7.3 V Spannung auf 5 V reduziert werden. Es wird dafür der LM2596S-ADJ DC-DC (Abbildung \ref{fig:lm25}) Spannungswandler eines unbekannten Herstellers verwendet, der bei Aliexpress erworben wurde. Der Abwärtsregler wird zwischen Akkumulator und den Verbrauchern geschaltet.
 
 \begin{figure}
     \centering
@@ -244,7 +249,7 @@ Die Ausgangsspannung des Akkus beträgt 7.4 V. Der Raspberry Pi Zero W 1.1, die 
     \label{fig:lm25}
 \end{figure}
 
-Um jedoch den Akkumulator zu laden, muss ein ein Step-Up Converter verwendet werden. Da das Solarpanel lediglich 5V liefert, wäre es sonnst nicht möglich den Akku zu laden. Somit können die 5V in 7.4V Hoch geregelt werden. Es wird ein Walfront-fcbw9hvekm Modul von Walfront verwendet (Abbildung \ref{fig:walfront})
+Um jedoch den Akkumulator zu laden, muss ein Step-Up Converter verwendet werden. Da das Solarpanel lediglich 5 V liefert, wäre es sonnst nicht möglich, den Akku zu laden. Somit können die 5 V in 7.4 V hoch geregelt werden. Es wird ein Walfront-fcbw9hvekm Modul von Walfront verwendet (Abbildung \ref{fig:walfront})
 
 
 \begin{figure}
@@ -254,4 +259,3 @@ Um jedoch den Akkumulator zu laden, muss ein ein Step-Up Converter verwendet wer
     \label{fig:walfront}
     
 \end{figure}
-
